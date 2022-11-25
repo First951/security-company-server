@@ -1,8 +1,11 @@
 package ru.first;
 
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  * Основной класс приложения
  */
+@SpringBootApplication
 public class Main {
     /**
      * Точка входа в приложение.
@@ -10,6 +13,6 @@ public class Main {
      * @param args аргументы переданные из командной строки
      */
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        SpringApplication.run(Main.class, args);
     }
 }
