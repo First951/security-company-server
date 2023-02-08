@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: "security-company-server"
+  datasource:
+    url: jdbc:postgresql://${DB_URL}:5432/security-company-db
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+#  jp
+#    hibernate:
+#      ddl-auto: create
