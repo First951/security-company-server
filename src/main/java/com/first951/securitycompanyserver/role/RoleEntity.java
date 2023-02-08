@@ -3,7 +3,7 @@ package com.first951.securitycompanyserver.role;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "roless")
+@Table(name = "role")
 public class RoleEntity {
 
     @Id
