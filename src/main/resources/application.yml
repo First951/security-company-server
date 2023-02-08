@@ -5,6 +5,6 @@ spring:
     url: jdbc:postgresql://${DB_URL}:5432/security-company-db
     username: ${DB_USER}
     password: ${DB_PASSWORD}
-#  jp
+#  jpa:
 #    hibernate:
 #      ddl-auto: create
