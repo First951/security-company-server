@@ -23,10 +23,10 @@ public class DutyRegisterEntity {
     @JoinColumn(name = "guard_id", nullable = false)
     private PersonEntity guard;
 
-    @Column(name = "begin", nullable = false)
+    @Column(name = "timestamp_begin", nullable = false)
     private Timestamp begin;
 
-    @Column(name = "end", nullable = false)
+    @Column(name = "timestamp_end", nullable = false)
     private Timestamp end;
 
 }

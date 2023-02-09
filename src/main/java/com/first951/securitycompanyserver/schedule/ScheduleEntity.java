@@ -18,10 +18,10 @@ public class ScheduleEntity {
     @JoinColumn(name = "post_id", nullable = false)
     private PostEntity post;
 
-    @Column(name = "begin", nullable = false)
+    @Column(name = "timestamp_begin", nullable = false)
     private Timestamp begin;
 
-    @Column(name = "end", nullable = false)
+    @Column(name = "timestamp_end", nullable = false)
     private Timestamp end;
 
 }
