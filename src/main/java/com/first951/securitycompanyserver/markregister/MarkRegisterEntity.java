@@ -27,5 +27,4 @@ public class MarkRegisterEntity {
     @Column(name = "comment", nullable = false)
     private String comment;
 
-
 }
