@@ -4,8 +4,6 @@ import com.first951.securitycompanyserver.person.PersonEntity;
 import com.first951.securitycompanyserver.post.PostEntity;
 import jakarta.persistence.*;
 
-import java.sql.Date;
-import java.sql.Time;
 import java.sql.Timestamp;
 
 @Entity

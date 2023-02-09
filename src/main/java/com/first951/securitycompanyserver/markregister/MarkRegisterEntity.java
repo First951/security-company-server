@@ -1,7 +1,6 @@
 package com.first951.securitycompanyserver.markregister;
 
 import com.first951.securitycompanyserver.markplan.MarkPlanEntity;
-import com.first951.securitycompanyserver.schedule.ScheduleEntity;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
@@ -27,7 +26,6 @@ public class MarkRegisterEntity {
 
     @Column(name = "comment", nullable = false)
     private String comment;
-
 
 
 }
