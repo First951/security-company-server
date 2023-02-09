@@ -11,10 +11,10 @@ public class OrganizationEntity {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "address")
+    @Column(name = "address", nullable = false)
     private String address;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
 }
