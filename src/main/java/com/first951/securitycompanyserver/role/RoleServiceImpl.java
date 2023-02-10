@@ -44,8 +44,8 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public RoleDto update(RoleDto roleDto) {
         RoleEntity roleRequest = modelMapper.map(roleDto, RoleEntity.class);
-        RoleEntity role = roleRepository.findById(roleDto.getId())
-                .orElseThrow(() -> new ResourceNotFoundException("Role", "id", String.valueOf(roleDto.getId())));
+        RoleEntity role = roleRepository.findById(roleRequest.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Role", "id", String.valueOf(roleRequest.getId())));
         role.setName(roleRequest.getName());
 
         RoleEntity createdRole = roleRepository.save(role);

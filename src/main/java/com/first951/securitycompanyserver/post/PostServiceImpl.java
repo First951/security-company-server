@@ -41,10 +41,10 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public PostDto update(int id, PostDto postDto) {
+    public PostDto update(PostDto postDto) {
         PostEntity postRequest = modelMapper.map(postDto, PostEntity.class);
-        PostEntity post = postRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Post", "id", String.valueOf(id)));
+        PostEntity post = postRepository.findById(postRequest.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Post", "id", String.valueOf(postRequest.getId())));
         post.setObject(postRequest.getObject());
         post.setName(postRequest.getName());
         post.setComment(postRequest.getComment());
@@ -55,7 +55,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public PostDto deletePost(int id) {
+    public PostDto delete(int id) {
         PostEntity post = postRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Post", "id", String.valueOf(id)));
 

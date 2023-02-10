@@ -41,10 +41,10 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public PersonDto update(int id, PersonDto personDto) {
+    public PersonDto update(PersonDto personDto) {
         PersonEntity personRequest = modelMapper.map(personDto, PersonEntity.class);
-        PersonEntity person = personRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Person", "id", String.valueOf(id)));
+        PersonEntity person = personRepository.findById(personRequest.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Person", "id", String.valueOf(personRequest.getId())));
         person.setLastName(personRequest.getLastName());
         person.setFirstName(personRequest.getFirstName());
         person.setPatronymic(personRequest.getPatronymic());
@@ -55,7 +55,7 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public PersonDto deletePost(int id) {
+    public PersonDto delete(int id) {
         PersonEntity person = personRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Person", "id", String.valueOf(id)));
 

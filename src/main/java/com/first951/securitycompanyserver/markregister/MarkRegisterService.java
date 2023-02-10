@@ -10,8 +10,8 @@ public interface MarkRegisterService {
 
     MarkRegisterDto create(MarkRegisterDto markRegisterDto);
 
-    MarkRegisterDto update(int id, MarkRegisterDto markRegisterDto);
+    MarkRegisterDto update(MarkRegisterDto markRegisterDto);
 
-    MarkRegisterDto deletePost(int id);
+    MarkRegisterDto delete(int id);
 
 }

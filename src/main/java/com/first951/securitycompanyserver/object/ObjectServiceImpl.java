@@ -41,10 +41,10 @@ public class ObjectServiceImpl implements ObjectService {
     }
 
     @Override
-    public ObjectDto update(int id, ObjectDto objectDto) {
+    public ObjectDto update(ObjectDto objectDto) {
         ObjectEntity objectRequest = modelMapper.map(objectDto, ObjectEntity.class);
-        ObjectEntity object = objectRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Object", "id", String.valueOf(id)));
+        ObjectEntity object = objectRepository.findById(objectRequest.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Object", "id", String.valueOf(objectRequest.getId())));
         object.setOrganization(objectRequest.getOrganization());
         object.setName(objectRequest.getName());
 
@@ -53,7 +53,7 @@ public class ObjectServiceImpl implements ObjectService {
     }
 
     @Override
-    public ObjectDto deletePost(int id) {
+    public ObjectDto delete(int id) {
         ObjectEntity object = objectRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Object", "id", String.valueOf(id)));
 

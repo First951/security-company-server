@@ -41,10 +41,10 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     @Override
-    public OrganizationDto update(int id, OrganizationDto organizationDto) {
+    public OrganizationDto update(OrganizationDto organizationDto) {
         OrganizationEntity organizationRequest = modelMapper.map(organizationDto, OrganizationEntity.class);
-        OrganizationEntity organization = organizationRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Organization", "id", String.valueOf(id)));
+        OrganizationEntity organization = organizationRepository.findById(organizationRequest.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Organization", "id", String.valueOf(organizationRequest.getId())));
         organization.setAddress(organizationRequest.getAddress());
         organization.setName(organizationRequest.getName());
 
@@ -53,7 +53,7 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     @Override
-    public OrganizationDto deletePost(int id) {
+    public OrganizationDto delete(int id) {
         OrganizationEntity organization = organizationRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Organization", "id", String.valueOf(id)));
 

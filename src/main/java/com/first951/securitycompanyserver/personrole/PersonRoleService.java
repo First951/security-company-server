@@ -10,8 +10,8 @@ public interface PersonRoleService {
 
     PersonRoleDto create(PersonRoleDto personRoleDto);
 
-    PersonRoleDto update(int id, PersonRoleDto personRoleDto);
+    PersonRoleDto update(PersonRoleDto personRoleDto);
 
-    PersonRoleDto deletePost(int id);
+    PersonRoleDto delete(int id);
 
 }

@@ -10,8 +10,8 @@ public interface OrganizationService {
 
     OrganizationDto create(OrganizationDto organizationDto);
 
-    OrganizationDto update(int id, OrganizationDto organizationDto);
+    OrganizationDto update(OrganizationDto organizationDto);
 
-    OrganizationDto deletePost(int id);
+    OrganizationDto delete(int id);
 
 }

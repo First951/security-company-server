@@ -41,10 +41,10 @@ public class MarkRegisterServiceImpl implements MarkRegisterService {
     }
 
     @Override
-    public MarkRegisterDto update(int id, MarkRegisterDto markRegisterDto) {
+    public MarkRegisterDto update(MarkRegisterDto markRegisterDto) {
         MarkRegisterEntity markRegisterRequest = modelMapper.map(markRegisterDto, MarkRegisterEntity.class);
-        MarkRegisterEntity markRegister = markRegisterRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("MarkRegister", "id", String.valueOf(id)));
+        MarkRegisterEntity markRegister = markRegisterRepository.findById(markRegisterRequest.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("MarkRegister", "id", String.valueOf(markRegisterRequest.getId())));
         markRegister.setMarkPlan(markRegisterRequest.getMarkPlan());
         markRegister.setTimestamp(markRegisterRequest.getTimestamp());
         markRegister.setType(markRegisterRequest.getType());
@@ -55,7 +55,7 @@ public class MarkRegisterServiceImpl implements MarkRegisterService {
     }
 
     @Override
-    public MarkRegisterDto deletePost(int id) {
+    public MarkRegisterDto delete(int id) {
         MarkRegisterEntity markRegister = markRegisterRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("MarkRegister", "id", String.valueOf(id)));
 

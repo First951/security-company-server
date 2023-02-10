@@ -10,8 +10,8 @@ public interface DutyRegisterService {
 
     DutyRegisterDto create(DutyRegisterDto dutyRegisterDto);
 
-    DutyRegisterDto update(int id, DutyRegisterDto dutyRegisterDto);
+    DutyRegisterDto update(DutyRegisterDto dutyRegisterDto);
 
-    DutyRegisterDto deletePost(int id);
+    DutyRegisterDto delete(int id);
 
 }

@@ -41,10 +41,10 @@ public class PersonRoleServiceImpl implements PersonRoleService {
     }
 
     @Override
-    public PersonRoleDto update(int id, PersonRoleDto personRoleDto) {
+    public PersonRoleDto update(PersonRoleDto personRoleDto) {
         PersonRoleEntity personRoleRequest = modelMapper.map(personRoleDto, PersonRoleEntity.class);
-        PersonRoleEntity personRole = personRoleRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("PersonRole", "id", String.valueOf(id)));
+        PersonRoleEntity personRole = personRoleRepository.findById(personRoleRequest.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("PersonRole", "id", String.valueOf(personRoleRequest.getId())));
         personRole.setPerson(personRoleRequest.getPerson());
         personRole.setRole(personRoleRequest.getRole());
         personRole.setPeriodFrom(personRoleRequest.getPeriodFrom());
@@ -55,7 +55,7 @@ public class PersonRoleServiceImpl implements PersonRoleService {
     }
 
     @Override
-    public PersonRoleDto deletePost(int id) {
+    public PersonRoleDto delete(int id) {
         PersonRoleEntity personRole = personRoleRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("PersonRole", "id", String.valueOf(id)));
 

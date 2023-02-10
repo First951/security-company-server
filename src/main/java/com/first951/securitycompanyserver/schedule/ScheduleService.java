@@ -10,8 +10,8 @@ public interface ScheduleService {
 
     ScheduleDto create(ScheduleDto scheduleDto);
 
-    ScheduleDto update(int id, ScheduleDto scheduleDto);
+    ScheduleDto update(ScheduleDto scheduleDto);
 
-    ScheduleDto deletePost(int id);
+    ScheduleDto delete(int id);
 
 }

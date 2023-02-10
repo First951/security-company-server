@@ -41,10 +41,10 @@ public class DutyRegisterServiceImpl implements DutyRegisterService {
     }
 
     @Override
-    public DutyRegisterDto update(int id, DutyRegisterDto dutyRegisterDto) {
+    public DutyRegisterDto update(DutyRegisterDto dutyRegisterDto) {
         DutyRegisterEntity dutyRegisterRequest = modelMapper.map(dutyRegisterDto, DutyRegisterEntity.class);
-        DutyRegisterEntity dutyRegister = dutyRegisterRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("DutyRegister", "id", String.valueOf(id)));
+        DutyRegisterEntity dutyRegister = dutyRegisterRepository.findById(dutyRegisterRequest.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("DutyRegister", "id", String.valueOf(dutyRegisterRequest.getId())));
         dutyRegister.setPost(dutyRegisterRequest.getPost());
         dutyRegister.setGuard(dutyRegisterRequest.getGuard());
         dutyRegister.setBegin(dutyRegisterRequest.getBegin());
@@ -55,7 +55,7 @@ public class DutyRegisterServiceImpl implements DutyRegisterService {
     }
 
     @Override
-    public DutyRegisterDto deletePost(int id) {
+    public DutyRegisterDto delete(int id) {
         DutyRegisterEntity dutyRegister = dutyRegisterRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("DutyRegister", "id", String.valueOf(id)));
 

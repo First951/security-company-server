@@ -41,10 +41,10 @@ public class MarkPlanServiceImpl implements MarkPlanService {
     }
 
     @Override
-    public MarkPlanDto update(int id, MarkPlanDto markPlanDto) {
+    public MarkPlanDto update(MarkPlanDto markPlanDto) {
         MarkPlanEntity markPlanRequest = modelMapper.map(markPlanDto, MarkPlanEntity.class);
-        MarkPlanEntity markPlan = markPlanRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("MarkPlan", "id", String.valueOf(id)));
+        MarkPlanEntity markPlan = markPlanRepository.findById(markPlanRequest.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("MarkPlan", "id", String.valueOf(markPlanRequest.getId())));
         markPlan.setSchedule(markPlanRequest.getSchedule());
         markPlan.setTimestamp(markPlanRequest.getTimestamp());
 
@@ -53,7 +53,7 @@ public class MarkPlanServiceImpl implements MarkPlanService {
     }
 
     @Override
-    public MarkPlanDto deletePost(int id) {
+    public MarkPlanDto delete(int id) {
         MarkPlanEntity markPlan = markPlanRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("MarkPlan", "id", String.valueOf(id)));
 

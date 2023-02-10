@@ -10,8 +10,8 @@ public interface PersonService {
 
     PersonDto create(PersonDto personDto);
 
-    PersonDto update(int id, PersonDto personDto);
+    PersonDto update(PersonDto personDto);
 
-    PersonDto deletePost(int id);
+    PersonDto delete(int id);
 
 }

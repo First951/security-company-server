@@ -10,8 +10,8 @@ public interface PostService {
 
     PostDto create(PostDto postDto);
 
-    PostDto update(int id, PostDto postDto);
+    PostDto update(PostDto postDto);
 
-    PostDto deletePost(int id);
+    PostDto delete(int id);
 
 }

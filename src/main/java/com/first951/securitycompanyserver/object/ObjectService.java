@@ -10,8 +10,8 @@ public interface ObjectService {
 
     ObjectDto create(ObjectDto objectDto);
 
-    ObjectDto update(int id, ObjectDto objectDto);
+    ObjectDto update(ObjectDto objectDto);
 
-    ObjectDto deletePost(int id);
+    ObjectDto delete(int id);
 
 }

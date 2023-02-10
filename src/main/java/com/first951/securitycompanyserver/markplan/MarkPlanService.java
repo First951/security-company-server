@@ -10,8 +10,8 @@ public interface MarkPlanService {
 
     MarkPlanDto create(MarkPlanDto markPlanDto);
 
-    MarkPlanDto update(int id, MarkPlanDto markPlanDto);
+    MarkPlanDto update(MarkPlanDto markPlanDto);
 
-    MarkPlanDto deletePost(int id);
+    MarkPlanDto delete(int id);
 
 }
