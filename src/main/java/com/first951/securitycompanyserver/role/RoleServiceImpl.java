@@ -1,7 +1,6 @@
 package com.first951.securitycompanyserver.role;
 
 import com.first951.securitycompanyserver.exception.ResourceNotFoundException;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
