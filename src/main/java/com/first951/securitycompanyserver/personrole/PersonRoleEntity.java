@@ -3,11 +3,15 @@ package com.first951.securitycompanyserver.personrole;
 import com.first951.securitycompanyserver.person.PersonEntity;
 import com.first951.securitycompanyserver.role.RoleEntity;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.sql.Date;
 
 @Entity
 @Table(name = "person_role")
+@Getter
+@Setter
 public class PersonRoleEntity {
 
     @Id

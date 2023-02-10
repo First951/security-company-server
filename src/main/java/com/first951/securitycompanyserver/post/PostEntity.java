@@ -2,9 +2,13 @@ package com.first951.securitycompanyserver.post;
 
 import com.first951.securitycompanyserver.object.ObjectEntity;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "post")
+@Getter
+@Setter
 public class PostEntity {
 
     @Id

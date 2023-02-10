@@ -2,11 +2,15 @@ package com.first951.securitycompanyserver.schedule;
 
 import com.first951.securitycompanyserver.post.PostEntity;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.sql.Timestamp;
 
 @Entity
 @Table
+@Getter
+@Setter
 public class ScheduleEntity {
 
     @Id
