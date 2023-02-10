@@ -1,6 +1,7 @@
 package com.first951.securitycompanyserver.dutyregister;
 
 import com.first951.securitycompanyserver.exception.ResourceNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -8,16 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class DutyRegisterServiceImpl implements DutyRegisterService {
 
     private final DutyRegisterRepository dutyRegisterRepository;
     private final ModelMapper modelMapper;
-
-    public DutyRegisterServiceImpl(DutyRegisterRepository dutyRegisterRepository, ModelMapper modelMapper) {
-        this.dutyRegisterRepository = dutyRegisterRepository;
-        this.modelMapper = modelMapper;
-    }
-
 
     @Override
     public DutyRegisterDto get(int id) {

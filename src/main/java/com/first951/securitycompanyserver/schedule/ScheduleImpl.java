@@ -1,6 +1,8 @@
 package com.first951.securitycompanyserver.schedule;
 
 import com.first951.securitycompanyserver.exception.ResourceNotFoundException;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -8,16 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class ScheduleImpl implements ScheduleService {
 
     private final ScheduleRepository scheduleRepository;
     private final ModelMapper modelMapper;
-
-    public ScheduleImpl(ScheduleRepository scheduleRepository, ModelMapper modelMapper) {
-        this.scheduleRepository = scheduleRepository;
-        this.modelMapper = modelMapper;
-    }
-
 
     @Override
     public ScheduleDto get(int id) {

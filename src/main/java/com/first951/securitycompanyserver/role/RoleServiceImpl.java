@@ -1,6 +1,8 @@
 package com.first951.securitycompanyserver.role;
 
 import com.first951.securitycompanyserver.exception.ResourceNotFoundException;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -8,16 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class RoleServiceImpl implements RoleService {
 
     private final RoleRepository roleRepository;
     private final ModelMapper modelMapper;
-
-    public RoleServiceImpl(RoleRepository roleRepository, ModelMapper modelMapper) {
-        this.roleRepository = roleRepository;
-        this.modelMapper = modelMapper;
-    }
-
 
     @Override
     public RoleDto get(int id) {

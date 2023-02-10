@@ -1,6 +1,7 @@
 package com.first951.securitycompanyserver.organization;
 
 import com.first951.securitycompanyserver.exception.ResourceNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -8,16 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class OrganizationServiceImpl implements OrganizationService {
 
     private final OrganizationRepository organizationRepository;
     private final ModelMapper modelMapper;
-
-    public OrganizationServiceImpl(OrganizationRepository organizationRepository, ModelMapper modelMapper) {
-        this.organizationRepository = organizationRepository;
-        this.modelMapper = modelMapper;
-    }
-
 
     @Override
     public OrganizationDto get(int id) {

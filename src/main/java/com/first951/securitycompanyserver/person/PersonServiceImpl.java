@@ -1,6 +1,7 @@
 package com.first951.securitycompanyserver.person;
 
 import com.first951.securitycompanyserver.exception.ResourceNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -8,16 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class PersonServiceImpl implements PersonService {
 
     private final PersonRepository personRepository;
     private final ModelMapper modelMapper;
-
-    public PersonServiceImpl(PersonRepository personRepository, ModelMapper modelMapper) {
-        this.personRepository = personRepository;
-        this.modelMapper = modelMapper;
-    }
-
 
     @Override
     public PersonDto get(int id) {

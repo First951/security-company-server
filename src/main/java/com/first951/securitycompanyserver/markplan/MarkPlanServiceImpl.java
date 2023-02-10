@@ -1,6 +1,7 @@
 package com.first951.securitycompanyserver.markplan;
 
 import com.first951.securitycompanyserver.exception.ResourceNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -8,16 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class MarkPlanServiceImpl implements MarkPlanService {
 
     private final MarkPlanRepository markPlanRepository;
     private final ModelMapper modelMapper;
-
-    public MarkPlanServiceImpl(MarkPlanRepository markPlanRepository, ModelMapper modelMapper) {
-        this.markPlanRepository = markPlanRepository;
-        this.modelMapper = modelMapper;
-    }
-
 
     @Override
     public MarkPlanDto get(int id) {
