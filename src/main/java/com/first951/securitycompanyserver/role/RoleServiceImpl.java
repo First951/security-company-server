@@ -29,7 +29,7 @@ public class RoleServiceImpl implements RoleService {
         Iterable<RoleEntity> roles = roleRepository.findAll();
         List<RoleDto> roleDtos = new ArrayList<>();
 
-        roles.forEach(role -> modelMapper.map(role, RoleDto.class));
+        roles.forEach(role -> roleDtos.add(modelMapper.map(role, RoleDto.class)));
         return roleDtos;
     }
 
@@ -42,10 +42,10 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public RoleDto update(int id, RoleDto roleDto) {
+    public RoleDto update(RoleDto roleDto) {
         RoleEntity roleRequest = modelMapper.map(roleDto, RoleEntity.class);
-        RoleEntity role = roleRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Role", "id", String.valueOf(id)));
+        RoleEntity role = roleRepository.findById(roleDto.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Role", "id", String.valueOf(roleDto.getId())));
         role.setName(roleRequest.getName());
 
         RoleEntity createdRole = roleRepository.save(role);
@@ -53,7 +53,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public RoleDto deletePost(int id) {
+    public RoleDto delete(int id) {
         RoleEntity role = roleRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Role", "id", String.valueOf(id)));
 
