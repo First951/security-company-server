@@ -1,9 +1,13 @@
 package com.first951.securitycompanyserver.organization;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "organization")
+@Getter
+@Setter
 public class OrganizationEntity {
 
     @Id
@@ -11,10 +15,10 @@ public class OrganizationEntity {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "address")
+    @Column(name = "address", nullable = false)
     private String address;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
 }

@@ -1,0 +1,49 @@
+package com.first951.securitycompanyserver.markplan;
+
+import com.first951.securitycompanyserver.role.RoleDto;
+import com.first951.securitycompanyserver.role.RoleService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("${application.endpoint.root}" + "${application.endpoint.markPlan}")
+@Tag(name = "План отметок")
+@RequiredArgsConstructor
+public class MarkPlanController {
+
+    private final RoleService roleService;
+
+    @GetMapping("{id}")
+    @Operation(summary = "Получение плановой отметки по id")
+    public RoleDto get(@PathVariable int id) {
+        return roleService.get(id);
+    }
+
+    @GetMapping
+    @Operation(summary = "Получение списка плановых отметок")
+    public List<RoleDto> getAll() {
+        return roleService.getAll();
+    }
+
+    @PostMapping
+    @Operation(summary = "Создание новой плановой отметки")
+    public RoleDto post(@RequestBody RoleDto roleDto) {
+        return roleService.create(roleDto);
+    }
+
+    @PutMapping
+    @Operation(summary = "Обновление существующей плановой отметки")
+    public RoleDto put(@RequestBody RoleDto roleDto) {
+        return roleService.update(roleDto);
+    }
+
+    @DeleteMapping("{id}")
+    @Operation(summary = "Удаление плановой отметки")
+    public RoleDto delete(@PathVariable int id) {
+        return roleService.delete(id);
+    }
+}

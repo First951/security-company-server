@@ -1,9 +1,13 @@
 package com.first951.securitycompanyserver.role;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "role")
+@Getter
+@Setter
 public class RoleEntity {
 
     @Id
