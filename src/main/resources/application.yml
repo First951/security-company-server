@@ -1,3 +1,6 @@
+server:
+  port: 8951
+
 spring:
   application:
     name: "security-company-server"
