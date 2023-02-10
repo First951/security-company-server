@@ -2,11 +2,15 @@ package com.first951.securitycompanyserver.markregister;
 
 import com.first951.securitycompanyserver.markplan.MarkPlanEntity;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.sql.Timestamp;
 
 @Entity
 @Table(name = "mark_register")
+@Getter
+@Setter
 public class MarkRegisterEntity {
 
     @Id
