@@ -10,6 +10,10 @@ spring:
 #    hibernate:
 #      ddl-auto: create
 
+springdoc:
+  swagger-ui:
+    path: /docs/api
+
 application:
   endpoint:
     root: /api
