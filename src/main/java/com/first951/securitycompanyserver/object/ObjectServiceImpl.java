@@ -49,7 +49,7 @@ public class ObjectServiceImpl implements ObjectService {
         ObjectEntity objectRequest = modelMapper.map(objectDto, ObjectEntity.class);
         ObjectEntity object = objectRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Object", "id", String.valueOf(id)));
-        object.setOrganization(object.getOrganization());
+        object.setOrganization(objectRequest.getOrganization());
         object.setName(objectRequest.getName());
 
         ObjectEntity createdObject = objectRepository.save(object);
