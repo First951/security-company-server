@@ -29,7 +29,7 @@ public class ScheduleImpl implements ScheduleService {
         Iterable<ScheduleEntity> schedules = scheduleRepository.findAll();
         List<ScheduleDto> scheduleDtos = new ArrayList<>();
 
-        schedules.forEach(schedule -> modelMapper.map(schedule, ScheduleDto.class));
+        schedules.forEach(schedule -> scheduleDtos.add(modelMapper.map(schedule, ScheduleDto.class)));
         return scheduleDtos;
     }
 

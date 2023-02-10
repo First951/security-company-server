@@ -28,7 +28,7 @@ public class PostServiceImpl implements PostService {
         Iterable<PostEntity> posts = postRepository.findAll();
         List<PostDto> postDtos = new ArrayList<>();
 
-        posts.forEach(post -> modelMapper.map(post, PostDto.class));
+        posts.forEach(post -> postDtos.add(modelMapper.map(post, PostDto.class)));
         return postDtos;
     }
 

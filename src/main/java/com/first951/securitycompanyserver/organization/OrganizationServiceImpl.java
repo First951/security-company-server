@@ -28,7 +28,7 @@ public class OrganizationServiceImpl implements OrganizationService {
         Iterable<OrganizationEntity> organizations = organizationRepository.findAll();
         List<OrganizationDto> organizationDtos = new ArrayList<>();
 
-        organizations.forEach(organization -> modelMapper.map(organization, OrganizationDto.class));
+        organizations.forEach(organization -> organizationDtos.add(modelMapper.map(organization, OrganizationDto.class)));
         return organizationDtos;
     }
 

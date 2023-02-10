@@ -28,7 +28,7 @@ public class ObjectServiceImpl implements ObjectService {
         Iterable<ObjectEntity> objects = objectRepository.findAll();
         List<ObjectDto> objectDtos = new ArrayList<>();
 
-        objects.forEach(object -> modelMapper.map(object, ObjectDto.class));
+        objects.forEach(object -> objectDtos.add(modelMapper.map(object, ObjectDto.class)));
         return objectDtos;
     }
 

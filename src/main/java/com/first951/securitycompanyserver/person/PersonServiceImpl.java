@@ -28,7 +28,7 @@ public class PersonServiceImpl implements PersonService {
         Iterable<PersonEntity> persons = personRepository.findAll();
         List<PersonDto> personDtos = new ArrayList<>();
 
-        persons.forEach(person -> modelMapper.map(person, PersonDto.class));
+        persons.forEach(person -> personDtos.add(modelMapper.map(person, PersonDto.class)));
         return personDtos;
     }
 

@@ -28,7 +28,7 @@ public class MarkRegisterServiceImpl implements MarkRegisterService {
         Iterable<MarkRegisterEntity> markRegisters = markRegisterRepository.findAll();
         List<MarkRegisterDto> markRegisterDtos = new ArrayList<>();
 
-        markRegisters.forEach(markRegister -> modelMapper.map(markRegister, MarkRegisterDto.class));
+        markRegisters.forEach(markRegister -> markRegisterDtos.add(modelMapper.map(markRegister, MarkRegisterDto.class)));
         return markRegisterDtos;
     }
 

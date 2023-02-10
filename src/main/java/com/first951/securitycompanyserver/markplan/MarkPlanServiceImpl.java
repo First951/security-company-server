@@ -28,7 +28,7 @@ public class MarkPlanServiceImpl implements MarkPlanService {
         Iterable<MarkPlanEntity> markPlans = markPlanRepository.findAll();
         List<MarkPlanDto> markPlanDtos = new ArrayList<>();
 
-        markPlans.forEach(markPlan -> modelMapper.map(markPlan, MarkPlanDto.class));
+        markPlans.forEach(markPlan -> markPlanDtos.add(modelMapper.map(markPlan, MarkPlanDto.class)));
         return markPlanDtos;
     }
 

@@ -28,7 +28,7 @@ public class DutyRegisterServiceImpl implements DutyRegisterService {
         Iterable<DutyRegisterEntity> dutyRegisters = dutyRegisterRepository.findAll();
         List<DutyRegisterDto> dutyRegisterDtos = new ArrayList<>();
 
-        dutyRegisters.forEach(dutyRegister -> modelMapper.map(dutyRegister, DutyRegisterDto.class));
+        dutyRegisters.forEach(dutyRegister -> dutyRegisterDtos.add(modelMapper.map(dutyRegister, DutyRegisterDto.class)));
         return dutyRegisterDtos;
     }
 
