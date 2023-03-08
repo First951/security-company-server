@@ -1,19 +1,17 @@
 package com.first951.securitycompanyserver.organization;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 @Entity
-@Table(name = "organization")
-@Getter
-@Setter
-public class OrganizationEntity {
+@Table(name = "organizations")
+@Data
+public class Organization {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Long id;
 
     @Column(name = "address", nullable = false)
     private String address;

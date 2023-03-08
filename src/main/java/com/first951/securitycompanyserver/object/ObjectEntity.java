@@ -1,6 +1,6 @@
 package com.first951.securitycompanyserver.object;
 
-import com.first951.securitycompanyserver.organization.OrganizationEntity;
+import com.first951.securitycompanyserver.organization.Organization;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,7 +18,7 @@ public class ObjectEntity {
 
     @ManyToOne
     @JoinColumn(name = "organization_id", nullable = false)
-    private OrganizationEntity organization;
+    private Organization organization;
 
     @Column(name = "name", nullable = false)
     private String name;

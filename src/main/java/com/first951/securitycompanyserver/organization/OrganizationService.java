@@ -1,17 +1,22 @@
 package com.first951.securitycompanyserver.organization;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
+
 import java.util.List;
 
 public interface OrganizationService {
 
-    OrganizationDto get(int id);
+    OrganizationDto create(@Valid OrganizationDto organizationDto);
 
-    List<OrganizationDto> getAll();
+    OrganizationDto read(@Positive long id);
 
-    OrganizationDto create(OrganizationDto organizationDto);
+    List<OrganizationDto> search(OrganizationDto organizationDto, @PositiveOrZero Long from,
+                                 @Positive Integer size);
 
-    OrganizationDto update(OrganizationDto organizationDto);
+    OrganizationDto update(@Positive long id, @Valid OrganizationDto organizationDto);
 
-    OrganizationDto delete(int id);
+    void delete(@Positive long id);
 
 }
