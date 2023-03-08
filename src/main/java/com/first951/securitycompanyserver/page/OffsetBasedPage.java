@@ -6,11 +6,13 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.Optional;
 
 @EqualsAndHashCode
 @ToString
+@Validated
 public class OffsetBasedPage implements Pageable {
 
     private final int limit;

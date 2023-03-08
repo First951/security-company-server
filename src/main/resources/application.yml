@@ -21,11 +21,11 @@ application:
   endpoint:
     root: /api
     search: /search
-    dutyRegister: /dutyRegisters
-    markPlan: /markPlans
-    markRegister: /markRegisters
-    object: /objects
-    organization: /organizations
-    person: /persons
-    post: /posts
-    schedule: /schedules
+    dutyRegisters: /dutyRegisters
+    markPlans: /markPlans
+    markRegisters: /markRegisters
+    places: /places
+    organizations: /organizations
+    persons: /persons
+    posts: /posts
+    schedules: /schedules
