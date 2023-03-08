@@ -62,4 +62,5 @@ public class PersonServiceImpl implements PersonService {
         personRepository.delete(person);
         return modelMapper.map(person, PersonDto.class);
     }
+
 }

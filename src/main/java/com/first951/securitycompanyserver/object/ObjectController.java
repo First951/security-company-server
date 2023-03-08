@@ -44,4 +44,5 @@ public class ObjectController {
     public ObjectDto delete(@PathVariable int id) {
         return objectService.delete(id);
     }
+
 }

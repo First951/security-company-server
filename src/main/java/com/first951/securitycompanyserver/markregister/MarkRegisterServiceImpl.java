@@ -62,4 +62,5 @@ public class MarkRegisterServiceImpl implements MarkRegisterService {
         markRegisterRepository.delete(markRegister);
         return modelMapper.map(markRegister, MarkRegisterDto.class);
     }
+
 }

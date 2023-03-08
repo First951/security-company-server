@@ -44,4 +44,5 @@ public class DutyRegisterController {
     public DutyRegisterDto delete(@PathVariable int id) {
         return dutyRegisterService.delete(id);
     }
+
 }

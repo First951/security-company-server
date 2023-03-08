@@ -44,4 +44,5 @@ public class PostController {
     public PostDto delete(@PathVariable int id) {
         return postService.delete(id);
     }
+
 }

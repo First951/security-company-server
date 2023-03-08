@@ -62,4 +62,5 @@ public class PostServiceImpl implements PostService {
         postRepository.delete(post);
         return modelMapper.map(post, PostDto.class);
     }
+
 }

@@ -8,10 +8,10 @@ spring:
     url: jdbc:postgresql://${DB_URL}:5432/security-company-db
     username: ${DB_USER}
     password: ${DB_PASSWORD}
-## Uncomment for database re-creation
-#  jpa:
-#    hibernate:
-#      ddl-auto: create
+# Uncomment for database re-creation
+  jpa:
+    hibernate:
+      ddl-auto: create
 
 springdoc:
   swagger-ui:
@@ -26,7 +26,5 @@ application:
     object: /objects
     organization: /organizations
     person: /persons
-    personRole: /personRoles
     post: /posts
-    role: /roles
     schedule: /schedules

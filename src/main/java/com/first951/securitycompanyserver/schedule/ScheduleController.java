@@ -44,4 +44,5 @@ public class ScheduleController {
     public ScheduleDto delete(@PathVariable int id) {
         return scheduleService.delete(id);
     }
+
 }

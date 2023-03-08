@@ -1,7 +1,7 @@
 package com.first951.securitycompanyserver.markplan;
 
-import com.first951.securitycompanyserver.role.RoleDto;
-import com.first951.securitycompanyserver.role.RoleService;
+import com.first951.securitycompanyserver.person.role.RoleDto;
+import com.first951.securitycompanyserver.person.role.RoleService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -46,4 +46,5 @@ public class MarkPlanController {
     public RoleDto delete(@PathVariable int id) {
         return roleService.delete(id);
     }
+
 }

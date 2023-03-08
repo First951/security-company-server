@@ -44,4 +44,5 @@ public class MarkRegisterController {
     public MarkRegisterDto delete(@PathVariable int id) {
         return markRegisterService.delete(id);
     }
+
 }

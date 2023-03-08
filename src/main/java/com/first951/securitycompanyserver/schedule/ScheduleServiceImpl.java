@@ -61,4 +61,5 @@ public class ScheduleServiceImpl implements ScheduleService {
         scheduleRepository.delete(schedule);
         return modelMapper.map(schedule, ScheduleDto.class);
     }
+
 }

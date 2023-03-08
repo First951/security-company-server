@@ -44,4 +44,5 @@ public class OrganizationController {
     public OrganizationDto delete(@PathVariable int id) {
         return organizationService.delete(id);
     }
+
 }

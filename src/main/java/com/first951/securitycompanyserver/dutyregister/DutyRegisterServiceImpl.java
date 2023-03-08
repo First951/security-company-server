@@ -62,4 +62,5 @@ public class DutyRegisterServiceImpl implements DutyRegisterService {
         dutyRegisterRepository.delete(dutyRegister);
         return modelMapper.map(dutyRegister, DutyRegisterDto.class);
     }
+
 }

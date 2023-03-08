@@ -60,4 +60,5 @@ public class ObjectServiceImpl implements ObjectService {
         objectRepository.delete(object);
         return modelMapper.map(object, ObjectDto.class);
     }
+
 }

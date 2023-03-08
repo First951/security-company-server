@@ -60,4 +60,5 @@ public class OrganizationServiceImpl implements OrganizationService {
         organizationRepository.delete(organization);
         return modelMapper.map(organization, OrganizationDto.class);
     }
+
 }
