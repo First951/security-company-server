@@ -21,9 +21,7 @@ application:
   endpoint:
     root: /api
     search: /search
-    dutyRegisters: /dutyRegisters
-    markPlans: /markPlans
-    markRegisters: /markRegisters
+    marks: /marks
     places: /places
     organizations: /organizations
     persons: /persons

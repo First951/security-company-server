@@ -3,14 +3,14 @@ package com.first951.securitycompanyserver.schema.schedule;
 import com.first951.securitycompanyserver.schema.person.Person;
 import com.first951.securitycompanyserver.schema.post.Post;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 import java.util.Date;
 import java.util.List;
 
-public interface ScheduleRepository extends CrudRepository<Schedule, Long> {
+public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
 
     @Query("""
             SELECT

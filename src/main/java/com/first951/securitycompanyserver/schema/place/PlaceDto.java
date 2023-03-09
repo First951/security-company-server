@@ -12,7 +12,7 @@ public class PlaceDto {
     @JsonProperty(value = "id", access = JsonProperty.Access.READ_ONLY)
     private Long id;
 
-    @JsonProperty(value = "organizationId")
+    @JsonProperty("organizationId")
     @NotNull
     @Positive
     private Long organizationId;
