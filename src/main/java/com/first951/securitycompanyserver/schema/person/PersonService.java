@@ -1,17 +1,24 @@
 package com.first951.securitycompanyserver.schema.person;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
+import org.springframework.validation.annotation.Validated;
+
 import java.util.List;
 
+@Validated
 public interface PersonService {
 
-    PersonDto get(int id);
+    PersonDto create(@Valid PersonDto personDto);
 
-    List<PersonDto> getAll();
+    PersonDto read(@Positive long id);
 
-    PersonDto create(PersonDto personDto);
+    List<PersonDto> search(PersonDto personDto, @PositiveOrZero Long from,
+                           @Positive Integer size);
 
-    PersonDto update(PersonDto personDto);
+    PersonDto update(@Positive long id, @Valid PersonDto personDto);
 
-    PersonDto delete(int id);
+    void delete(@Positive long id);
 
 }

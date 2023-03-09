@@ -13,36 +13,39 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PersonController {
 
-    private final PersonService personService;
+    private final PersonService service;
 
     @GetMapping("{id}")
     @Operation(summary = "Получение человека по id")
-    public PersonDto get(@PathVariable int id) {
-        return personService.get(id);
+    public PersonDto get(@PathVariable long id) {
+        return service.read(id);
     }
 
-    @GetMapping
-    @Operation(summary = "Получение списка людей")
-    public List<PersonDto> getAll() {
-        return personService.getAll();
+    @GetMapping("${application.endpoint.search}")
+    @Operation(summary = "Поиск человека")
+    public List<PersonDto> search(PersonDto filter,
+                                  @RequestParam(required = false) Long from,
+                                  @RequestParam(required = false) Integer size) {
+        return service.search(filter, from, size);
     }
 
     @PostMapping
     @Operation(summary = "Создание нового человека")
     public PersonDto post(@RequestBody PersonDto personDto) {
-        return personService.create(personDto);
+        return service.create(personDto);
     }
 
-    @PutMapping
+    @PutMapping("{id}")
     @Operation(summary = "Обновление существующего человека")
-    public PersonDto put(@RequestBody PersonDto personDto) {
-        return personService.update(personDto);
+    public PersonDto put(@PathVariable long id,
+                         @RequestBody PersonDto personDto) {
+        return service.update(id, personDto);
     }
 
     @DeleteMapping("{id}")
     @Operation(summary = "Удаление человека")
-    public PersonDto delete(@PathVariable int id) {
-        return personService.delete(id);
+    public void delete(@PathVariable long id) {
+        service.delete(id);
     }
 
 }

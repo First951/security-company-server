@@ -1,11 +1,15 @@
 package com.first951.securitycompanyserver.schema.person;
 
-import com.first951.securitycompanyserver.exception.ResourceNotFoundException;
+import com.first951.securitycompanyserver.exception.BadRequestException;
+import com.first951.securitycompanyserver.exception.ConflictException;
+import com.first951.securitycompanyserver.exception.NotFoundException;
+import com.first951.securitycompanyserver.mapper.MappingType;
+import com.first951.securitycompanyserver.page.OffsetBasedPage;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -13,54 +17,59 @@ import java.util.List;
 public class PersonServiceImpl implements PersonService {
 
     private final PersonRepository personRepository;
-    private final ModelMapper modelMapper;
-
-    @Override
-    public PersonDto get(int id) {
-        PersonEntity person = personRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Person", "id", String.valueOf(id)));
-
-        return modelMapper.map(person, PersonDto.class);
-    }
-
-    @Override
-    public List<PersonDto> getAll() {
-        Iterable<PersonEntity> persons = personRepository.findAll();
-        List<PersonDto> personDtos = new ArrayList<>();
-
-        persons.forEach(person -> personDtos.add(modelMapper.map(person, PersonDto.class)));
-        return personDtos;
-    }
+    private final PersonMapper personMapper;
 
     @Override
     public PersonDto create(PersonDto personDto) {
-        PersonEntity person = modelMapper.map(personDto, PersonEntity.class);
-
-        PersonEntity createdPerson = personRepository.save(person);
-        return modelMapper.map(createdPerson, PersonDto.class);
+        try {
+            Person personRequest = personMapper.toEntity(personDto, MappingType.DEFAULT);
+            Person personResponse = personRepository.save(personRequest);
+            return personMapper.toDto(personResponse);
+        } catch (DataIntegrityViolationException e) {
+            throw new ConflictException("Нарушение целостности данных");
+        }
     }
 
     @Override
-    public PersonDto update(PersonDto personDto) {
-        PersonEntity personRequest = modelMapper.map(personDto, PersonEntity.class);
-        PersonEntity person = personRepository.findById(personRequest.getId())
-                .orElseThrow(() -> new ResourceNotFoundException("Person", "id", String.valueOf(personRequest.getId())));
-        person.setLastName(personRequest.getLastName());
-        person.setFirstName(personRequest.getFirstName());
-        person.setPatronymic(personRequest.getPatronymic());
-        person.setPhoneNumber(personRequest.getPhoneNumber());
-
-        PersonEntity createdPerson = personRepository.save(person);
-        return modelMapper.map(createdPerson, PersonDto.class);
+    public PersonDto read(long id) {
+        Person personResponse = personRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Человек с id=" + id + " не найден"));
+        return personMapper.toDto(personResponse);
     }
 
     @Override
-    public PersonDto delete(int id) {
-        PersonEntity person = personRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Person", "id", String.valueOf(id)));
+    public List<PersonDto> search(PersonDto filter, Long from, Integer size) {
+        Pageable pageable = new OffsetBasedPage(from, size);
+        List<Person> page = personRepository.search(filter.getLastName(), filter.getFirstName(),
+                filter.getPatronymic(), filter.getPhoneNumber(), pageable);
+        return personMapper.toDtoList(page);
+    }
 
-        personRepository.delete(person);
-        return modelMapper.map(person, PersonDto.class);
+    @Override
+    public PersonDto update(long id, PersonDto personDto) {
+        if (personRepository.existsById(id)) {
+            Person personRequest = personMapper.toEntity(personDto, MappingType.DEFAULT);
+            personRequest.setId(id);
+
+            Person personResponse = personRepository.save(personRequest);
+            return personMapper.toDto(personResponse);
+        } else {
+            throw new NotFoundException("Человек с id=" + id + " не найден");
+        }
+    }
+
+    @Override
+    public void delete(long id) {
+        if (personRepository.existsById(id)) {
+            try {
+                personRepository.deleteById(id);
+            } catch (DataIntegrityViolationException e) {
+                throw new BadRequestException("Невозможно удалить человека с id= " + id + ". Нарушение целостности" +
+                        " данных");
+            }
+        } else {
+            throw new NotFoundException("Человек с id=" + id + " не найден");
+        }
     }
 
 }
