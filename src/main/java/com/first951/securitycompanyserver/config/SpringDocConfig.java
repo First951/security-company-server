@@ -14,4 +14,5 @@ public class SpringDocConfig {
                 .title("API для пректа \"Охранное предприятие\"")
                 .version("0.1.0"));
     }
+
 }
