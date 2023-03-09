@@ -3,9 +3,11 @@ package com.first951.securitycompanyserver.schema.organization;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 
+@Validated
 public interface OrganizationService {
 
     OrganizationDto create(@Valid OrganizationDto organizationDto);

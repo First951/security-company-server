@@ -23,7 +23,7 @@ public interface OrganizationRepository extends JpaRepository<Organization, Long
             ORDER BY
                 o.id
             """)
-    List<Organization> findAllByAddressAndName(@Param("address") String address, @Param("name") String name,
-                                               Pageable pageable);
+    List<Organization> search(@Param("address") String address, @Param("name") String name,
+                              Pageable pageable);
 
 }

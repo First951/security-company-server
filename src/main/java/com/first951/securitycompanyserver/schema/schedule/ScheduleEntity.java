@@ -1,6 +1,6 @@
 package com.first951.securitycompanyserver.schema.schedule;
 
-import com.first951.securitycompanyserver.schema.post.PostEntity;
+import com.first951.securitycompanyserver.schema.post.Post;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,7 +20,7 @@ public class ScheduleEntity {
 
     @ManyToOne
     @JoinColumn(name = "post_id", nullable = false)
-    private PostEntity post;
+    private Post post;
 
     @Column(name = "timestamp_begin", nullable = false)
     private Timestamp begin;

@@ -13,36 +13,39 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PostController {
 
-    private final PostService postService;
+    private final PostService service;
 
     @GetMapping("{id}")
     @Operation(summary = "Получение поста по id")
-    public PostDto get(@PathVariable int id) {
-        return postService.get(id);
+    public PostDto get(@PathVariable long id) {
+        return service.read(id);
     }
 
-    @GetMapping
-    @Operation(summary = "Получение списка постов")
-    public List<PostDto> getAll() {
-        return postService.getAll();
+    @GetMapping("${application.endpoint.search}")
+    @Operation(summary = "Поиск поста по имени")
+    public List<PostDto> search(PostDto filter,
+                                @RequestParam(required = false) Long from,
+                                @RequestParam(required = false) Integer size) {
+        return service.search(filter, from, size);
     }
 
     @PostMapping
     @Operation(summary = "Создание нового поста")
     public PostDto post(@RequestBody PostDto postDto) {
-        return postService.create(postDto);
+        return service.create(postDto);
     }
 
-    @PutMapping
+    @PutMapping("{id}")
     @Operation(summary = "Обновление существующего поста")
-    public PostDto put(@RequestBody PostDto postDto) {
-        return postService.update(postDto);
+    public PostDto put(@PathVariable long id,
+                       @RequestBody PostDto postDto) {
+        return service.update(id, postDto);
     }
 
     @DeleteMapping("{id}")
     @Operation(summary = "Удаление поста")
-    public PostDto delete(@PathVariable int id) {
-        return postService.delete(id);
+    public void delete(@PathVariable long id) {
+        service.delete(id);
     }
 
 }

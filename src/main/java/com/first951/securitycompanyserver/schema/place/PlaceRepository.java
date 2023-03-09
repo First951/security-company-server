@@ -14,14 +14,16 @@ public interface PlaceRepository extends CrudRepository<Place, Long> {
 
     @Query("""
             SELECT
-                o
+                p
             FROM
-                Place o
+                Place p
             WHERE
-                (:name IS NULL OR o.name LIKE %:name%)
+                (:organization IS NULL OR p.organization = :organization)
+            AND
+                (:name IS NULL OR p.name LIKE %:name%)
             ORDER BY
-                o.id
+                p.id
             """)
-    List<Place> findAllByName(@Param("name") String name, Pageable pageable);
+    List<Place> search(@Param("organization") Organization organization, @Param("name") String name, Pageable pageable);
 
 }

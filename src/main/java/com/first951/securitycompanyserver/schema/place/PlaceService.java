@@ -1,6 +1,5 @@
 package com.first951.securitycompanyserver.schema.place;
 
-import com.first951.securitycompanyserver.schema.organization.OrganizationDto;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
@@ -15,9 +14,7 @@ public interface PlaceService {
 
     PlaceDto read(@Positive long id);
 
-    List<PlaceDto> searchByName(PlaceDto filterDto, @PositiveOrZero Long from, @Positive Integer size);
-
-    List<PlaceDto> searchByOrganization(OrganizationDto filterDto, @PositiveOrZero Long from, @Positive Integer size);
+    List<PlaceDto> search(PlaceDto filterDto, @PositiveOrZero Long from, @Positive Integer size);
 
     PlaceDto update(@Positive long id, @Valid PlaceDto placeDto);
 

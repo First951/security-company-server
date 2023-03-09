@@ -1,11 +1,15 @@
 package com.first951.securitycompanyserver.schema.post;
 
-import com.first951.securitycompanyserver.exception.ResourceNotFoundException;
+import com.first951.securitycompanyserver.exception.BadRequestException;
+import com.first951.securitycompanyserver.exception.ConflictException;
+import com.first951.securitycompanyserver.exception.NotFoundException;
+import com.first951.securitycompanyserver.mapper.MappingType;
+import com.first951.securitycompanyserver.page.OffsetBasedPage;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -13,54 +17,61 @@ import java.util.List;
 public class PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
-    private final ModelMapper modelMapper;
-
-    @Override
-    public PostDto get(int id) {
-        PostEntity post = postRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Post", "id", String.valueOf(id)));
-
-        return modelMapper.map(post, PostDto.class);
-    }
-
-    @Override
-    public List<PostDto> getAll() {
-        Iterable<PostEntity> posts = postRepository.findAll();
-        List<PostDto> postDtos = new ArrayList<>();
-
-        posts.forEach(post -> postDtos.add(modelMapper.map(post, PostDto.class)));
-        return postDtos;
-    }
+    private final PostMapper postMapper;
 
     @Override
     public PostDto create(PostDto postDto) {
-        PostEntity post = modelMapper.map(postDto, PostEntity.class);
-
-        PostEntity createdPost = postRepository.save(post);
-        return modelMapper.map(createdPost, PostDto.class);
+        try {
+            Post postRequest = postMapper.toEntity(postDto, MappingType.DEFAULT);
+            Post postResponse = postRepository.save(postRequest);
+            return postMapper.toDto(postResponse);
+        } catch (DataIntegrityViolationException e) {
+            throw new ConflictException("Нарушение целостности данных");
+        }
     }
 
     @Override
-    public PostDto update(PostDto postDto) {
-        PostEntity postRequest = modelMapper.map(postDto, PostEntity.class);
-        PostEntity post = postRepository.findById(postRequest.getId())
-                .orElseThrow(() -> new ResourceNotFoundException("Post", "id", String.valueOf(postRequest.getId())));
-        post.setPlace(postRequest.getPlace());
-        post.setName(postRequest.getName());
-        post.setComment(postRequest.getComment());
-        post.setAddress(postRequest.getAddress());
-
-        PostEntity createdPost = postRepository.save(post);
-        return modelMapper.map(createdPost, PostDto.class);
+    public PostDto read(long id) {
+        Post postResponse = postRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Пост с id=" + id + " не найден"));
+        return postMapper.toDto(postResponse);
     }
 
     @Override
-    public PostDto delete(int id) {
-        PostEntity post = postRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Post", "id", String.valueOf(id)));
+    public List<PostDto> search(PostDto filterDto, Long from, Integer size) {
+        Post filter = postMapper.toEntity(filterDto, MappingType.FORCE);
+        Pageable pageable = new OffsetBasedPage(from, size);
 
-        postRepository.delete(post);
-        return modelMapper.map(post, PostDto.class);
+        List<Post> posts = postRepository.search(filter.getPlace(), filter.getName(), filter.getComment(),
+                filter.getAddress(), pageable);
+        return postMapper.toDtoList(posts);
+    }
+
+    @Override
+    public PostDto update(long id, PostDto postDto) {
+        if (postRepository.existsById(id)) {
+            Post postRequest = postMapper.toEntity(postDto, MappingType.DEFAULT);
+            postRequest.setId(id);
+
+            Post postResponse = postRepository.save(postRequest);
+            return postMapper.toDto(postResponse);
+        } else {
+            throw new NotFoundException("Пост с id=" + id + " не найден");
+        }
+    }
+
+    @Override
+    public void delete(long id) {
+        if (postRepository.existsById(id)) {
+            try {
+                postRepository.deleteById(id);
+            } catch (DataIntegrityViolationException e) {
+                throw new BadRequestException("Невозможно удалить пост с id= " + id + ". Нарушение целостности" +
+                        " данных");
+            }
+        } else {
+            throw new NotFoundException("Пост с id=" + id + " не найден");
+        }
     }
 
 }

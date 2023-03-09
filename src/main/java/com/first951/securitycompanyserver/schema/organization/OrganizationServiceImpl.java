@@ -9,13 +9,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-@Validated
 public class OrganizationServiceImpl implements OrganizationService {
 
     private final OrganizationRepository organizationRepository;
@@ -42,7 +40,7 @@ public class OrganizationServiceImpl implements OrganizationService {
     @Override
     public List<OrganizationDto> search(OrganizationDto filter, Long from, Integer size) {
         Pageable pageable = new OffsetBasedPage(from, size);
-        List<Organization> page = organizationRepository.findAllByAddressAndName(filter.getAddress(), filter.getName(), pageable);
+        List<Organization> page = organizationRepository.search(filter.getAddress(), filter.getName(), pageable);
         return organizationMapper.toDtoList(page);
     }
 

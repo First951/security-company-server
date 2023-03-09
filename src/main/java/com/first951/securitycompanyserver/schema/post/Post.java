@@ -6,18 +6,18 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "post")
+@Table(name = "posts")
 @Getter
 @Setter
-public class PostEntity {
+public class Post {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "place_id", nullable = false)
+    @JoinColumn(name = "place", nullable = false)
     private Place place;
 
     @Column(name = "name", nullable = false)

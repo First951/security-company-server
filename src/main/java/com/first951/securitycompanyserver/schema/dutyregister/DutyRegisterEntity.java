@@ -1,7 +1,7 @@
 package com.first951.securitycompanyserver.schema.dutyregister;
 
 import com.first951.securitycompanyserver.schema.person.PersonEntity;
-import com.first951.securitycompanyserver.schema.post.PostEntity;
+import com.first951.securitycompanyserver.schema.post.Post;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,7 +21,7 @@ public class DutyRegisterEntity {
 
     @ManyToOne
     @JoinColumn(name = "post_id", nullable = false)
-    private PostEntity post;
+    private Post post;
 
     @ManyToOne
     @JoinColumn(name = "guard_id", nullable = false)

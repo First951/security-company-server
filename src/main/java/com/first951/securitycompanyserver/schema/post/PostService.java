@@ -1,17 +1,21 @@
 package com.first951.securitycompanyserver.schema.post;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
+
 import java.util.List;
 
 public interface PostService {
 
-    PostDto get(int id);
+    PostDto create(@Valid PostDto postDto);
 
-    List<PostDto> getAll();
+    PostDto read(@Positive long id);
 
-    PostDto create(PostDto postDto);
+    List<PostDto> search(PostDto filterDto, @PositiveOrZero Long from, @Positive Integer size);
 
-    PostDto update(PostDto postDto);
+    PostDto update(@Positive long id, @Valid PostDto postDto);
 
-    PostDto delete(int id);
+    void delete(@Positive long id);
 
 }

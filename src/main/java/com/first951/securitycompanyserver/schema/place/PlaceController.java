@@ -22,11 +22,11 @@ public class PlaceController {
     }
 
     @GetMapping("${application.endpoint.search}")
-    @Operation(summary = "Поиск объекта по имени")
+    @Operation(summary = "Поиск объекта")
     public List<PlaceDto> search(PlaceDto filter,
                                  @RequestParam(required = false) Long from,
                                  @RequestParam(required = false) Integer size) {
-        return service.searchByName(filter, from, size);
+        return service.search(filter, from, size);
     }
 
     @PostMapping
