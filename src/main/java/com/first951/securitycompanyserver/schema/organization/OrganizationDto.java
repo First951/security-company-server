@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class OrganizationDto {
 
-    @JsonProperty("id")
+    @JsonProperty(value = "id", access = JsonProperty.Access.READ_ONLY)
     private Long id;
 
     @JsonProperty("address")

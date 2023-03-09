@@ -15,7 +15,7 @@ public class Place {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "organization_id", nullable = false)
+    @JoinColumn(name = "organization", nullable = false)
     private Organization organization;
 
     @Column(name = "name", nullable = false)

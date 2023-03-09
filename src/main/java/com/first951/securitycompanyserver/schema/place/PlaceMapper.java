@@ -6,33 +6,28 @@ import com.first951.securitycompanyserver.schema.organization.OrganizationMapper
 import com.first951.securitycompanyserver.schema.organization.OrganizationService;
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 @Mapper(componentModel = "spring")
-public interface PlaceMapper {
+public abstract class PlaceMapper {
+
+    @Autowired
+    protected OrganizationService organizationService;
 
     @Mapping(target = "organization", ignore = true)
-    Place toEntity(PlaceDto dto,
-                   @Context OrganizationService organizationService,
-                   @Context MappingType mappingType);
-
-    @Mapping(target = "organizationId", source = "entity.organization.id")
-    PlaceDto toDto(Place entity);
-
-    List<Place> toEntityList(List<PlaceDto> dto);
-
-    List<PlaceDto> toDtoList(List<Place> entity);
+    public abstract Place toEntity(PlaceDto dto,
+                                   @Context MappingType mappingType);
 
     @AfterMapping
-    default void toEntity(@MappingTarget Place entity, PlaceDto dto,
-                          @Context OrganizationService organizationService,
-                          @Context MappingType mappingType) {
+    public void toEntity(@MappingTarget Place entity, PlaceDto dto,
+                         @Context MappingType mappingType) {
         if (dto.getOrganizationId() != null) {
             OrganizationMapper mapper = Mappers.getMapper(OrganizationMapper.class);
             try {
                 OrganizationDto organizationDto = organizationService.read(dto.getOrganizationId());
-                entity.setOrganization(mapper.toEntity(organizationDto));
+                entity.setOrganization(mapper.toEntity(organizationDto, MappingType.DEFAULT));
             } catch (Exception e) {
                 if (mappingType.equals(MappingType.DEFAULT)) {
                     throw e;
@@ -41,5 +36,14 @@ public interface PlaceMapper {
             }
         }
     }
+
+    public abstract List<Place> toEntityList(List<PlaceDto> dto,
+                                             @Context MappingType mappingType);
+
+
+    @Mapping(target = "organizationId", source = "entity.organization.id")
+    public abstract PlaceDto toDto(Place entity);
+
+    public abstract List<PlaceDto> toDtoList(List<Place> entity);
 
 }
