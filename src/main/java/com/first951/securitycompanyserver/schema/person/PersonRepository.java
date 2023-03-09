@@ -15,13 +15,13 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
             FROM
                 Person p
             WHERE
-                (:lastName IS NULL OR p.lastName LIKE %:lastName%)
+                (:lastName IS NULL OR lower(p.lastName) LIKE lower(concat('%', :lastName, '%')))
             AND
-                (:firstName IS NULL OR p.firstName LIKE %:firstName%)
+                (:firstName IS NULL OR lower(p.firstName) LIKE lower(concat('%', :firstName, '%')))
             AND
-                (:patronymic IS NULL OR p.patronymic LIKE %:patronymic%)
+                (:patronymic IS NULL OR lower(p.patronymic) LIKE lower(concat('%', :patronymic, '%')))
             AND
-                (:phoneNumber IS NULL OR p.phoneNumber LIKE %:phoneNumber%)
+                (:phoneNumber IS NULL OR lower(p.phoneNumber) LIKE lower(concat('%', :phoneNumber, '%')))
             ORDER BY
                 p.id
             """)

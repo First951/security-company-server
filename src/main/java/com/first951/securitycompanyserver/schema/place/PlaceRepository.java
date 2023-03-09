@@ -20,7 +20,7 @@ public interface PlaceRepository extends JpaRepository<Place, Long> {
             WHERE
                 (:organization IS NULL OR p.organization = :organization)
             AND
-                (:name IS NULL OR p.name LIKE %:name%)
+                (:name IS NULL OR lower(p.name) LIKE lower(concat('%', :name, '%')))
             ORDER BY
                 p.id
             """)

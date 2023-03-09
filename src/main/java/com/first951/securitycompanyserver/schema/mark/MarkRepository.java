@@ -26,7 +26,7 @@ public interface MarkRepository extends JpaRepository<Mark, Long> {
             AND
                 (:type IS NULL OR m.type = :type)
             AND
-                (:comment IS NULL OR m.comment LIKE %:comment%)
+                (:comment IS NULL OR lower(m.comment) LIKE lower(concat('%', :comment, '%')))
             ORDER BY
                 m.id
             """)

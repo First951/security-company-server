@@ -18,11 +18,11 @@ public interface PostRepository extends JpaRepository<Post, Long> {
             WHERE
                 (:place IS NULL OR p.place = :place)
             AND
-                (:name IS NULL OR p.name LIKE %:name%)
+                (:name IS NULL OR lower(p.name) LIKE lower(concat('%', :name, '%')))
             AND
-                (:comment IS NULL OR p.comment LIKE %:comment%)
+                (:comment IS NULL OR lower(p.comment) LIKE lower(concat('%', :comment, '%')))
             AND
-                (:address IS NULL OR p.address LIKE %:address%)
+                (:address IS NULL OR lower(p.address) LIKE lower(concat('%', :address, '%')))
             ORDER BY
                 p.id
             """)

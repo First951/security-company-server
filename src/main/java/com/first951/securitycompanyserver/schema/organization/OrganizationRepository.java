@@ -17,9 +17,9 @@ public interface OrganizationRepository extends JpaRepository<Organization, Long
             FROM
                 Organization o
             WHERE
-                (:address IS NULL OR o.address LIKE %:address%)
+                (:address IS NULL OR lower(o.address) LIKE lower(concat('%', :address, '%')))
             AND
-                (:name IS NULL OR o.name LIKE %:name%)
+                (:name IS NULL OR lower(o.name) LIKE lower(concat('%', :name, '%')))
             ORDER BY
                 o.id
             """)
