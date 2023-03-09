@@ -1,6 +1,6 @@
 package com.first951.securitycompanyserver.schema.markplan;
 
-import com.first951.securitycompanyserver.schema.schedule.ScheduleEntity;
+import com.first951.securitycompanyserver.schema.schedule.Schedule;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,7 +20,7 @@ public class MarkPlanEntity {
 
     @ManyToOne
     @JoinColumn(name = "schedule_id", nullable = false)
-    private ScheduleEntity schedule;
+    private Schedule schedule;
 
     @Column(name = "timestamp", nullable = false)
     private Timestamp timestamp;

@@ -13,36 +13,39 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ScheduleController {
 
-    private final ScheduleService scheduleService;
+    private final ScheduleService service;
 
     @GetMapping("{id}")
-    @Operation(summary = "Получение графика дежурств по id")
-    public ScheduleDto get(@PathVariable int id) {
-        return scheduleService.get(id);
+    @Operation(summary = "Получение элемента графика по id")
+    public ScheduleDto get(@PathVariable long id) {
+        return service.read(id);
     }
 
-    @GetMapping
-    @Operation(summary = "Получение списка графиков дежурств")
-    public List<ScheduleDto> getAll() {
-        return scheduleService.getAll();
+    @GetMapping("${application.endpoint.search}")
+    @Operation(summary = "Поиск элемента графика")
+    public List<ScheduleDto> search(ScheduleDto filter,
+                                    @RequestParam(required = false) Long from,
+                                    @RequestParam(required = false) Integer size) {
+        return service.search(filter, from, size);
     }
 
     @PostMapping
-    @Operation(summary = "Создание нового графига дежурств")
+    @Operation(summary = "Создание нового элемента графика")
     public ScheduleDto post(@RequestBody ScheduleDto scheduleDto) {
-        return scheduleService.create(scheduleDto);
+        return service.create(scheduleDto);
     }
 
-    @PutMapping
-    @Operation(summary = "Обновление существующего графига дежурств")
-    public ScheduleDto put(@RequestBody ScheduleDto scheduleDto) {
-        return scheduleService.update(scheduleDto);
+    @PutMapping("{id}")
+    @Operation(summary = "Обновление существующего элемента графика")
+    public ScheduleDto put(@PathVariable long id,
+                           @RequestBody ScheduleDto scheduleDto) {
+        return service.update(id, scheduleDto);
     }
 
     @DeleteMapping("{id}")
-    @Operation(summary = "Удаление графика дежурств")
-    public ScheduleDto delete(@PathVariable int id) {
-        return scheduleService.delete(id);
+    @Operation(summary = "Удаление элемента графика")
+    public void delete(@PathVariable long id) {
+        service.delete(id);
     }
 
 }

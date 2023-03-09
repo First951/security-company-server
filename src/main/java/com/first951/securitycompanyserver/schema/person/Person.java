@@ -1,13 +1,13 @@
 package com.first951.securitycompanyserver.schema.person;
 
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Table(name = "persons")
-@Getter
-@Setter
+@Data
 public class Person {
 
     @Id

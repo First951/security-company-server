@@ -29,7 +29,7 @@ public abstract class PostMapper {
             entity.setPlace(placeMapper.toEntity(placeDto, MappingType.DEFAULT));
         } catch (Exception e) {
             if ((mappingType.equals(MappingType.FORCE) && (dto.getPlaceId()) == null)) {
-                // Всё нормально, поле Organization останется null
+                // Всё нормально, поле place останется null
             } else {
                 throw e;
             }

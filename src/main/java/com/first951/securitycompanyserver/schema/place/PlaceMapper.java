@@ -31,7 +31,7 @@ public abstract class PlaceMapper {
             entity.setOrganization(organizationMapper.toEntity(organizationDto, MappingType.DEFAULT));
         } catch (Exception e) {
             if ((mappingType.equals(MappingType.FORCE)) && (dto.getOrganizationId()) == null) {
-                // Всё нормально, поле Organization останется null
+                // Всё нормально, поле organization останется null
             } else {
                 throw e;
             }

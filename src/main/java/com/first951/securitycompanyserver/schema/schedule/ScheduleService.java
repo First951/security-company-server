@@ -1,17 +1,23 @@
 package com.first951.securitycompanyserver.schema.schedule;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
+import org.springframework.validation.annotation.Validated;
+
 import java.util.List;
 
+@Validated
 public interface ScheduleService {
 
-    ScheduleDto get(int id);
+    ScheduleDto create(@Valid ScheduleDto scheduleDto);
 
-    List<ScheduleDto> getAll();
+    ScheduleDto read(@Positive long id);
 
-    ScheduleDto create(ScheduleDto scheduleDto);
+    List<ScheduleDto> search(ScheduleDto filterDto, @PositiveOrZero Long from, @Positive Integer size);
 
-    ScheduleDto update(ScheduleDto scheduleDto);
+    ScheduleDto update(@Positive long id, @Valid ScheduleDto scheduleDto);
 
-    ScheduleDto delete(int id);
+    void delete(@Positive long id);
 
 }
