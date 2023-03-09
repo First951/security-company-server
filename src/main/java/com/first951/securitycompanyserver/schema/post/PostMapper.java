@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", uses = PlaceMapper.class)
+@Mapper(componentModel = "spring")
 public abstract class PostMapper {
 
     @Autowired
@@ -28,7 +28,7 @@ public abstract class PostMapper {
             PlaceDto placeDto = placeService.read(dto.getPlaceId());
             entity.setPlace(placeMapper.toEntity(placeDto, MappingType.DEFAULT));
         } catch (Exception e) {
-            if (mappingType.equals(MappingType.FORCE)) {
+            if ((mappingType.equals(MappingType.FORCE) && (dto.getPlaceId()) == null)) {
                 // Всё нормально, поле Organization останется null
             } else {
                 throw e;

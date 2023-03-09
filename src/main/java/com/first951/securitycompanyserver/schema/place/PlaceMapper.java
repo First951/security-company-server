@@ -6,12 +6,11 @@ import com.first951.securitycompanyserver.schema.organization.OrganizationMapper
 import com.first951.securitycompanyserver.schema.organization.OrganizationService;
 import lombok.RequiredArgsConstructor;
 import org.mapstruct.*;
-import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", uses = OrganizationMapper.class)
+@Mapper(componentModel = "spring")
 @RequiredArgsConstructor
 public abstract class PlaceMapper {
 
@@ -31,7 +30,7 @@ public abstract class PlaceMapper {
             OrganizationDto organizationDto = organizationService.read(dto.getOrganizationId());
             entity.setOrganization(organizationMapper.toEntity(organizationDto, MappingType.DEFAULT));
         } catch (Exception e) {
-            if (mappingType.equals(MappingType.FORCE)) {
+            if ((mappingType.equals(MappingType.FORCE)) && (dto.getOrganizationId()) == null) {
                 // Всё нормально, поле Organization останется null
             } else {
                 throw e;
