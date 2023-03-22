@@ -21,12 +21,12 @@ public interface PostRepository extends JpaRepository<Post, Long> {
                 (:name IS NULL OR lower(p.name) LIKE lower(concat('%', :name, '%')))
             AND
                 (:comment IS NULL OR lower(p.comment) LIKE lower(concat('%', :comment, '%')))
-            AND
-                (:address IS NULL OR lower(p.address) LIKE lower(concat('%', :address, '%')))
             ORDER BY
                 p.id
             """)
-    List<Post> search(@Param("place") Place place, @Param("name") String name, @Param("comment") String comment,
-                      @Param("address") String address, Pageable pageable);
+    List<Post> search(@Param("place") Place place,
+                      @Param("name") String name,
+                      @Param("comment") String comment,
+                      Pageable pageable);
 
 }

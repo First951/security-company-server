@@ -1,11 +1,12 @@
 package com.first951.securitycompanyserver.schema.schedule;
 
-import com.first951.securitycompanyserver.schema.person.Person;
+import com.first951.securitycompanyserver.schema.mark.Mark;
 import com.first951.securitycompanyserver.schema.post.Post;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "schedule")
@@ -21,10 +22,6 @@ public class Schedule {
     @JoinColumn(name = "post", nullable = false)
     private Post post;
 
-    @ManyToOne
-    @JoinColumn(name = "person", nullable = false)
-    private Person person;
-
     @Column(name = "timestamp_begin", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date begin;
@@ -32,5 +29,8 @@ public class Schedule {
     @Column(name = "timestamp_end", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date end;
+
+    @OneToMany(mappedBy = "schedule")
+    private List<Mark> marks;
 
 }

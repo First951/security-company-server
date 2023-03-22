@@ -1,7 +1,10 @@
 package com.first951.securitycompanyserver.schema.organization;
 
+import com.first951.securitycompanyserver.schema.post.Post;
 import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.List;
 
 @Entity
 @Table(name = "organizations")
@@ -18,5 +21,8 @@ public class Organization {
 
     @Column(name = "name", nullable = false)
     private String name;
+
+    @OneToMany(mappedBy = "organization")
+    private List<Post> posts;
 
 }
