@@ -18,6 +18,8 @@ public abstract class ScheduleMapper {
 
 
     @Mapping(target = "postId", source = "entity.post.id")
+    @Mapping(target = "postDto", ignore = true)
+    @Mapping(target = "markDtos", ignore = true)
     public abstract ScheduleDto toDto(Schedule entity);
 
     public abstract List<ScheduleDto> toDtoList(List<Schedule> entity);

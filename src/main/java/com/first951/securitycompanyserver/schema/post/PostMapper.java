@@ -17,6 +17,8 @@ public abstract class PostMapper {
 
     @Mapping(target = "placeId", source = "entity.place.id")
     @Mapping(target = "organizationId", source = "entity.organization.id")
+    @Mapping(target = "placeDto", ignore = true)
+    @Mapping(target = "organizationDto", ignore = true)
     public abstract PostDto toDto(Post entity);
 
     public abstract List<PostDto> toDtoList(List<Post> entity);

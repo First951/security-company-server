@@ -19,6 +19,8 @@ public abstract class MarkMapper {
 
     @Mapping(target = "scheduleId", source = "entity.schedule.id")
     @Mapping(target = "personId", source = "entity.person.id")
+    @Mapping(target = "scheduleDto", ignore = true)
+    @Mapping(target = "personDto", ignore = true)
     public abstract MarkDto toDto(Mark entity);
 
     public abstract List<MarkDto> toDtoList(List<Mark> entity);
