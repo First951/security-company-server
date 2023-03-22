@@ -1,6 +1,5 @@
 package com.first951.securitycompanyserver.schema.schedule;
 
-import com.first951.securitycompanyserver.schema.person.Person;
 import com.first951.securitycompanyserver.schema.post.Post;
 import jakarta.persistence.*;
 import lombok.Data;

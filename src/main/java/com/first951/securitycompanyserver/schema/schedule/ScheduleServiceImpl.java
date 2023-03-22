@@ -3,10 +3,7 @@ package com.first951.securitycompanyserver.schema.schedule;
 import com.first951.securitycompanyserver.exception.BadRequestException;
 import com.first951.securitycompanyserver.exception.ConflictException;
 import com.first951.securitycompanyserver.exception.NotFoundException;
-import com.first951.securitycompanyserver.mapper.MappingType;
 import com.first951.securitycompanyserver.page.OffsetBasedPage;
-import com.first951.securitycompanyserver.schema.place.PlaceDto;
-import com.first951.securitycompanyserver.schema.post.Post;
 import com.first951.securitycompanyserver.schema.post.PostDto;
 import com.first951.securitycompanyserver.schema.post.PostMapper;
 import com.first951.securitycompanyserver.schema.post.PostService;
@@ -15,7 +12,10 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -30,7 +30,7 @@ public class ScheduleServiceImpl implements ScheduleService {
     @Override
     public ScheduleDto create(ScheduleDto scheduleDto) {
         try {
-            Schedule scheduleRequest = scheduleMapper.toEntity(scheduleDto, MappingType.DEFAULT);
+            Schedule scheduleRequest = scheduleMapper.toEntity(scheduleDto);
             PostDto postDto = postService.read(scheduleDto.getPostId());
             scheduleRequest.setPost(postMapper.toEntity(postDto));
 
@@ -50,7 +50,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     @Override
     public List<ScheduleDto> search(ScheduleDto filterDto, Long from, Integer size) {
-        Schedule filter = scheduleMapper.toEntity(filterDto, MappingType.FORCE);
+        Schedule filter = scheduleMapper.toEntity(filterDto);
         Pageable pageable = new OffsetBasedPage(from, size);
 
         List<Schedule> schedules =
@@ -60,9 +60,22 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
+    public List<ScheduleDto> searchByDay(ScheduleDto filterDto, Date day, Long from, Integer size) {
+        Schedule filter = scheduleMapper.toEntity(filterDto);
+        Instant truncatedDay = day.toInstant().truncatedTo(ChronoUnit.HOURS);
+        Instant truncatedNextDay = truncatedDay.plus(1, ChronoUnit.DAYS);
+
+        Pageable pageable = new OffsetBasedPage(from, size);
+
+        List<Schedule> schedules = scheduleRepository.search(filter.getPost(),
+                Date.from(truncatedDay), Date.from(truncatedNextDay), pageable);
+        return toDtoList(schedules);
+    }
+
+    @Override
     public ScheduleDto update(long id, ScheduleDto scheduleDto) {
         if (scheduleRepository.existsById(id)) {
-            Schedule scheduleRequest = scheduleMapper.toEntity(scheduleDto, MappingType.DEFAULT);
+            Schedule scheduleRequest = scheduleMapper.toEntity(scheduleDto);
             scheduleRequest.setId(id);
             PostDto postDto = postService.read(scheduleDto.getPostId());
             scheduleRequest.setPost(postMapper.toEntity(postDto));

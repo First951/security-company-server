@@ -1,11 +1,8 @@
 package com.first951.securitycompanyserver.schema.schedule;
 
-import com.first951.securitycompanyserver.mapper.MappingType;
-import com.first951.securitycompanyserver.schema.post.PostMapper;
-import com.first951.securitycompanyserver.schema.post.PostService;
 import lombok.RequiredArgsConstructor;
-import org.mapstruct.*;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import java.util.List;
 
@@ -14,11 +11,9 @@ import java.util.List;
 public abstract class ScheduleMapper {
 
     @Mapping(target = "post", ignore = true)
-    public abstract Schedule toEntity(ScheduleDto dto,
-                                      @Context MappingType mappingType);
+    public abstract Schedule toEntity(ScheduleDto dto);
 
-    public abstract List<Schedule> toEntityList(List<ScheduleDto> dto,
-                                                @Context MappingType mappingType);
+    public abstract List<Schedule> toEntityList(List<ScheduleDto> dto);
 
 
     @Mapping(target = "postId", source = "entity.post.id")

@@ -28,7 +28,7 @@ public abstract class MarkMapper {
                          @Context MappingType mappingType) {
         try {
             ScheduleDto scheduleDto = scheduleService.read(dto.getScheduleId());
-            entity.setSchedule(scheduleMapper.toEntity(scheduleDto, MappingType.DEFAULT));
+            entity.setSchedule(scheduleMapper.toEntity(scheduleDto));
         } catch (Exception e) {
             if ((mappingType.equals(MappingType.FORCE)) && (dto.getScheduleId()) == null) {
                 // Всё нормально, поле organization останется null

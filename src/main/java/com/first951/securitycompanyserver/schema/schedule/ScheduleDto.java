@@ -1,8 +1,6 @@
 package com.first951.securitycompanyserver.schema.schedule;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.first951.securitycompanyserver.schema.organization.OrganizationDto;
 import com.first951.securitycompanyserver.schema.post.PostDto;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
