@@ -9,9 +9,9 @@ spring:
     username: ${DB_USER}
     password: ${DB_PASSWORD}
 ## Раскоментировать для создания базы данных с нуля
-  jpa:
-    hibernate:
-      ddl-auto: update
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
 
 springdoc:
   swagger-ui:

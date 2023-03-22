@@ -2,6 +2,7 @@ package com.first951.securitycompanyserver.schema.mark;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.first951.securitycompanyserver.schema.mark.browsing.MarkBrowsing;
 import com.first951.securitycompanyserver.schema.mark.type.MarkType;
 import com.first951.securitycompanyserver.schema.person.PersonDto;
 import com.first951.securitycompanyserver.schema.schedule.ScheduleDto;
@@ -33,6 +34,9 @@ public class MarkDto {
 
     @JsonProperty("type")
     private MarkType type;
+
+    @JsonProperty("browsing")
+    private MarkBrowsing browsing;
 
     @JsonProperty("comment")
     private String comment;

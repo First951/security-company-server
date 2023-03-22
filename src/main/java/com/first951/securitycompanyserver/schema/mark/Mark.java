@@ -1,5 +1,6 @@
 package com.first951.securitycompanyserver.schema.mark;
 
+import com.first951.securitycompanyserver.schema.mark.browsing.MarkBrowsing;
 import com.first951.securitycompanyserver.schema.mark.type.MarkType;
 import com.first951.securitycompanyserver.schema.person.Person;
 import com.first951.securitycompanyserver.schema.schedule.Schedule;
@@ -38,6 +39,9 @@ public class Mark {
 
     @Column(name = "type")
     private MarkType type;
+
+    @Column(name = "browsing")
+    private MarkBrowsing browsing;
 
     @Column(name = "comment")
     private String comment;
