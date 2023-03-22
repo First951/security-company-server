@@ -1,6 +1,9 @@
 package com.first951.securitycompanyserver.schema.post;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.first951.securitycompanyserver.schema.organization.OrganizationDto;
+import com.first951.securitycompanyserver.schema.place.PlaceDto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -12,10 +15,15 @@ public class PostDto {
     @JsonProperty(value = "id", access = JsonProperty.Access.READ_ONLY)
     private Long id;
 
-    @JsonProperty("placeId")
+    @JsonProperty(value = "placeId", access = JsonProperty.Access.WRITE_ONLY)
     @NotNull
     @Positive
     private Long placeId;
+
+    @JsonProperty(value = "organizationId", access = JsonProperty.Access.WRITE_ONLY)
+    @NotNull
+    @Positive
+    private Long organizationId;
 
     @JsonProperty("name")
     @NotBlank
@@ -24,8 +32,12 @@ public class PostDto {
     @JsonProperty("comment")
     private String comment;
 
-    @JsonProperty("address")
-    @NotBlank
-    private String address;
+    @JsonProperty(value = "place", access = JsonProperty.Access.READ_ONLY)
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private PlaceDto placeDto;
+
+    @JsonProperty(value = "organization", access = JsonProperty.Access.READ_ONLY)
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private OrganizationDto organizationDto;
 
 }

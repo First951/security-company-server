@@ -22,7 +22,7 @@ public class PlaceServiceImpl implements PlaceService {
     @Override
     public PlaceDto create(PlaceDto placeDto) {
         try {
-            Place placeRequest = placeMapper.toEntity(placeDto, MappingType.DEFAULT);
+            Place placeRequest = placeMapper.toEntity(placeDto);
             Place placeResponse = placeRepository.save(placeRequest);
             return placeMapper.toDto(placeResponse);
         } catch (DataIntegrityViolationException e) {
@@ -39,17 +39,17 @@ public class PlaceServiceImpl implements PlaceService {
 
     @Override
     public List<PlaceDto> search(PlaceDto filterDto, Long from, Integer size) {
-        Place filter = placeMapper.toEntity(filterDto, MappingType.FORCE);
+        Place filter = placeMapper.toEntity(filterDto);
         Pageable pageable = new OffsetBasedPage(from, size);
 
-        List<Place> places = placeRepository.search(filter.getOrganization(), filter.getName(), pageable);
+        List<Place> places = placeRepository.search(filter.getAddress(), pageable);
         return placeMapper.toDtoList(places);
     }
 
     @Override
     public PlaceDto update(long id, PlaceDto placeDto) {
         if (placeRepository.existsById(id)) {
-            Place placeRequest = placeMapper.toEntity(placeDto, MappingType.DEFAULT);
+            Place placeRequest = placeMapper.toEntity(placeDto);
             placeRequest.setId(id);
 
             Place placeResponse = placeRepository.save(placeRequest);

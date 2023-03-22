@@ -5,11 +5,15 @@ import com.first951.securitycompanyserver.exception.ConflictException;
 import com.first951.securitycompanyserver.exception.NotFoundException;
 import com.first951.securitycompanyserver.mapper.MappingType;
 import com.first951.securitycompanyserver.page.OffsetBasedPage;
+import com.first951.securitycompanyserver.schema.post.Post;
+import com.first951.securitycompanyserver.schema.post.PostDto;
+import com.first951.securitycompanyserver.schema.post.PostMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -18,11 +22,12 @@ public class OrganizationServiceImpl implements OrganizationService {
 
     private final OrganizationRepository organizationRepository;
     private final OrganizationMapper organizationMapper;
+    private final PostMapper postMapper;
 
     @Override
     public OrganizationDto create(OrganizationDto organizationDto) {
         try {
-            Organization organizationRequest = organizationMapper.toEntity(organizationDto, MappingType.DEFAULT);
+            Organization organizationRequest = organizationMapper.toEntity(organizationDto);
             Organization organizationResponse = organizationRepository.save(organizationRequest);
             return organizationMapper.toDto(organizationResponse);
         } catch (DataIntegrityViolationException e) {
@@ -34,7 +39,14 @@ public class OrganizationServiceImpl implements OrganizationService {
     public OrganizationDto read(long id) {
         Organization organizationResponse = organizationRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Организация с id=" + id + " не найдена"));
-        return organizationMapper.toDto(organizationResponse);
+        OrganizationDto organizationDto = organizationMapper.toDto(organizationResponse);
+        organizationDto.setPostDtos(new ArrayList<>());
+        for (Post post : organizationResponse.getPosts()) {
+            PostDto postDto = postMapper.toDto(post);
+            organizationDto.getPostDtos().add(postDto);
+        }
+
+        return organizationDto;
     }
 
     @Override
@@ -47,7 +59,7 @@ public class OrganizationServiceImpl implements OrganizationService {
     @Override
     public OrganizationDto update(long id, OrganizationDto organizationDto) {
         if (organizationRepository.existsById(id)) {
-            Organization organizationRequest = organizationMapper.toEntity(organizationDto, MappingType.DEFAULT);
+            Organization organizationRequest = organizationMapper.toEntity(organizationDto);
             organizationRequest.setId(id);
 
             Organization organizationResponse = organizationRepository.save(organizationRequest);
@@ -69,6 +81,10 @@ public class OrganizationServiceImpl implements OrganizationService {
         } else {
             throw new NotFoundException("Организация с id=" + id + " не найдена");
         }
+    }
+
+    private OrganizationDto addExpand(OrganizationDto organizationDto, Organization organization) {
+        return null;
     }
 
 }

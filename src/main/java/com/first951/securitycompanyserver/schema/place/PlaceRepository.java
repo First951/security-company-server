@@ -10,20 +10,16 @@ import java.util.List;
 
 public interface PlaceRepository extends JpaRepository<Place, Long> {
 
-    List<Place> findAllByOrganizationOrderByName(Organization organization, Pageable pageable);
-
     @Query("""
             SELECT
                 p
             FROM
                 Place p
             WHERE
-                (:organization IS NULL OR p.organization = :organization)
-            AND
-                (:name IS NULL OR lower(p.name) LIKE lower(concat('%', :name, '%')))
+                (:address IS NULL OR lower(p.address) LIKE lower(concat('%', :address, '%')))
             ORDER BY
                 p.id
             """)
-    List<Place> search(@Param("organization") Organization organization, @Param("name") String name, Pageable pageable);
+    List<Place> search(@Param("address") String address, Pageable pageable);
 
 }

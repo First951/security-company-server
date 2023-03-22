@@ -1,22 +1,26 @@
 package com.first951.securitycompanyserver.schema.organization;
 
 import com.first951.securitycompanyserver.mapper.MappingType;
-import org.mapstruct.Context;
-import org.mapstruct.Mapper;
+import com.first951.securitycompanyserver.schema.place.Place;
+import com.first951.securitycompanyserver.schema.place.PlaceDto;
+import com.first951.securitycompanyserver.schema.post.PostDto;
+import com.first951.securitycompanyserver.schema.post.PostMapper;
+import com.first951.securitycompanyserver.schema.post.PostService;
+import org.mapstruct.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 @Mapper(componentModel = "spring")
 public abstract class OrganizationMapper {
 
-    public abstract Organization toEntity(OrganizationDto dto,
-                                          @Context MappingType mappingType);
+    @Mapping(target = "posts", ignore = true)
+    public abstract Organization toEntity(OrganizationDto dto);
+
+    public abstract List<Organization> toEntityList(List<OrganizationDto> dto);
 
 
-    public abstract List<Organization> toEntityList(List<OrganizationDto> dto,
-                                                    @Context MappingType mappingType);
-
-
+    @Mapping(target = "postDtos", ignore = true)
     public abstract OrganizationDto toDto(Organization entity);
 
     public abstract List<OrganizationDto> toDtoList(List<Organization> entity);

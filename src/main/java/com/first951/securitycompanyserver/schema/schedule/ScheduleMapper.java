@@ -17,14 +17,14 @@ import java.util.List;
 @RequiredArgsConstructor
 public abstract class ScheduleMapper {
 
-    @Autowired
-    private PostService postService;
-    @Autowired
-    private PostMapper postMapper;
-    @Autowired
-    private PersonService personService;
-    @Autowired
-    private PersonMapper personMapper;
+//    @Autowired
+//    private PostService postService;
+//    @Autowired
+//    private PostMapper postMapper;
+//    @Autowired
+//    private PersonService personService;
+//    @Autowired
+//    private PersonMapper personMapper;
 
     @Mapping(target = "post", ignore = true)
     @Mapping(target = "person", ignore = true)
@@ -34,27 +34,27 @@ public abstract class ScheduleMapper {
     @AfterMapping
     public void toEntity(@MappingTarget Schedule entity, ScheduleDto dto,
                          @Context MappingType mappingType) {
-        try {
-            PostDto postDto = postService.read(dto.getPostId());
-            entity.setPost(postMapper.toEntity(postDto, MappingType.DEFAULT));
-        } catch (Exception e) {
-            if ((mappingType.equals(MappingType.FORCE)) && (dto.getPostId()) == null) {
-                // Всё нормально, поле post останется null
-            } else {
-                throw e;
-            }
-        }
-
-        try {
-            PersonDto personDto = personService.read(dto.getPersonId());
-            entity.setPerson(personMapper.toEntity(personDto, MappingType.DEFAULT));
-        } catch (Exception e) {
-            if ((mappingType.equals(MappingType.FORCE)) && (dto.getPersonId()) == null) {
-                // Всё нормально, поле person останется null
-            } else {
-                throw e;
-            }
-        }
+//        try {
+//            PostDto postDto = postService.read(dto.getPostId());
+//            entity.setPost(postMapper.toEntity(postDto));
+//        } catch (Exception e) {
+//            if ((mappingType.equals(MappingType.FORCE)) && (dto.getPostId()) == null) {
+//                // Всё нормально, поле post останется null
+//            } else {
+//                throw e;
+//            }
+//        }
+//
+//        try {
+//            PersonDto personDto = personService.read(dto.getPersonId());
+//            entity.setPerson(personMapper.toEntity(personDto, MappingType.DEFAULT));
+//        } catch (Exception e) {
+//            if ((mappingType.equals(MappingType.FORCE)) && (dto.getPersonId()) == null) {
+//                // Всё нормально, поле person останется null
+//            } else {
+//                throw e;
+//            }
+//        }
     }
 
     public abstract List<Schedule> toEntityList(List<ScheduleDto> dto,

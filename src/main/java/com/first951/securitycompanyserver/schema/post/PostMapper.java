@@ -1,6 +1,9 @@
 package com.first951.securitycompanyserver.schema.post;
 
 import com.first951.securitycompanyserver.mapper.MappingType;
+import com.first951.securitycompanyserver.schema.organization.OrganizationDto;
+import com.first951.securitycompanyserver.schema.organization.OrganizationMapper;
+import com.first951.securitycompanyserver.schema.organization.OrganizationService;
 import com.first951.securitycompanyserver.schema.place.PlaceDto;
 import com.first951.securitycompanyserver.schema.place.PlaceMapper;
 import com.first951.securitycompanyserver.schema.place.PlaceService;
@@ -12,36 +15,25 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public abstract class PostMapper {
 
-    @Autowired
-    private PlaceService placeService;
-    @Autowired
-    private PlaceMapper placeMapper;
-
     @Mapping(target = "place", ignore = true)
-    public abstract Post toEntity(PostDto dto,
-                                  @Context MappingType mappingTyp);
+    @Mapping(target = "organization", ignore = true)
+    public abstract Post toEntity(PostDto dto);
+
+    public abstract List<Post> toEntityList(List<PostDto> dto);
+
+
+    @Mapping(target = "placeId", ignore = true)
+    @Mapping(target = "organizationId", ignore = true)
+    public abstract PostDto toDto(Post entity);
 
     @AfterMapping
-    public void toEntity(@MappingTarget Post entity, PostDto dto,
-                         @Context MappingType mappingType) {
-        try {
-            PlaceDto placeDto = placeService.read(dto.getPlaceId());
-            entity.setPlace(placeMapper.toEntity(placeDto, MappingType.DEFAULT));
-        } catch (Exception e) {
-            if ((mappingType.equals(MappingType.FORCE) && (dto.getPlaceId()) == null)) {
-                // Всё нормально, поле place останется null
-            } else {
-                throw e;
-            }
-        }
+    protected void toDto(@MappingTarget PostDto dto, Post entity) {
+//        PlaceDto placeDto = placeMapper.toDto(entity.getPlace());
+//        dto.setPlaceDto(placeDto);
+//
+//        OrganizationDto organizationDto = organizationMapper.toDto(entity.getOrganization());
+//        dto.setOrganizationDto(organizationDto);
     }
-
-    public abstract List<Post> toEntityList(List<PostDto> dto,
-                                            @Context MappingType mappingType);
-
-
-    @Mapping(target = "placeId", source = "entity.place.id")
-    public abstract PostDto toDto(Post entity);
 
     public abstract List<PostDto> toDtoList(List<Post> entity);
 

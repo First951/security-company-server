@@ -1,8 +1,10 @@
 package com.first951.securitycompanyserver.schema.place;
 
-import com.first951.securitycompanyserver.schema.organization.Organization;
+import com.first951.securitycompanyserver.schema.post.Post;
 import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.List;
 
 @Entity
 @Table(name = "places")
@@ -14,11 +16,10 @@ public class Place {
     @Column(name = "id")
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "organization", nullable = false)
-    private Organization organization;
+    @Column(name = "address", nullable = false)
+    private String address;
 
-    @Column(name = "name", nullable = false)
-    private String name;
+    @OneToMany(mappedBy = "place")
+    private List<Post> posts;
 
 }
