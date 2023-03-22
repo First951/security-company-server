@@ -11,6 +11,7 @@ import java.util.List;
 public abstract class ScheduleMapper {
 
     @Mapping(target = "post", ignore = true)
+    @Mapping(target = "marks", ignore = true)
     public abstract Schedule toEntity(ScheduleDto dto);
 
     public abstract List<Schedule> toEntityList(List<ScheduleDto> dto);

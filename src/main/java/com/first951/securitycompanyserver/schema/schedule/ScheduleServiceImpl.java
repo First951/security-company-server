@@ -4,6 +4,8 @@ import com.first951.securitycompanyserver.exception.BadRequestException;
 import com.first951.securitycompanyserver.exception.ConflictException;
 import com.first951.securitycompanyserver.exception.NotFoundException;
 import com.first951.securitycompanyserver.page.OffsetBasedPage;
+import com.first951.securitycompanyserver.schema.mark.MarkMapper;
+import com.first951.securitycompanyserver.schema.person.PersonMapper;
 import com.first951.securitycompanyserver.schema.post.PostDto;
 import com.first951.securitycompanyserver.schema.post.PostMapper;
 import com.first951.securitycompanyserver.schema.post.PostService;
@@ -26,6 +28,8 @@ public class ScheduleServiceImpl implements ScheduleService {
     private final ScheduleMapper scheduleMapper;
     private final PostService postService;
     private final PostMapper postMapper;
+    private final MarkMapper markMapper;
+    private final PersonMapper personMapper;
 
     @Override
     public ScheduleDto create(ScheduleDto scheduleDto) {
@@ -104,6 +108,11 @@ public class ScheduleServiceImpl implements ScheduleService {
     private ScheduleDto toDto(Schedule schedule) {
         ScheduleDto scheduleDto = scheduleMapper.toDto(schedule);
         scheduleDto.setPostDto(postService.read(schedule.getPost().getId()));
+        scheduleDto.setMarkDtos(new ArrayList<>());
+        schedule.getMarks().forEach(mark -> {
+            scheduleDto.getMarkDtos().add(markMapper.toDto(mark));
+            scheduleDto.getMarkDtos().get(scheduleDto.getMarkDtos().size() - 1).setPersonDto(personMapper.toDto(mark.getPerson()));
+        });
         return scheduleDto;
     }
 

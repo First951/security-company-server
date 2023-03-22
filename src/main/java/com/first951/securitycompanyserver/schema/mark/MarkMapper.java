@@ -1,8 +1,6 @@
 package com.first951.securitycompanyserver.schema.mark;
 
-import com.first951.securitycompanyserver.mapper.MappingType;
 import lombok.RequiredArgsConstructor;
-import org.mapstruct.Context;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -16,8 +14,7 @@ public abstract class MarkMapper {
     @Mapping(target = "person", ignore = true)
     public abstract Mark toEntity(MarkDto dto);
 
-    public abstract List<Mark> toEntityList(List<MarkDto> dto,
-                                            @Context MappingType mappingType);
+    public abstract List<Mark> toEntityList(List<MarkDto> dto);
 
 
     @Mapping(target = "scheduleId", source = "entity.schedule.id")
