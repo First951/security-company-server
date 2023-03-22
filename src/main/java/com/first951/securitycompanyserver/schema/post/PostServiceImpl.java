@@ -66,6 +66,10 @@ public class PostServiceImpl implements PostService {
         if (postRepository.existsById(id)) {
             Post postRequest = postMapper.toEntity(postDto);
             postRequest.setId(id);
+            PlaceDto placeDto = placeService.read(postDto.getPlaceId());
+            postRequest.setPlace(placeMapper.toEntity(placeDto));
+            OrganizationDto organizationDto = organizationService.read(postDto.getOrganizationId());
+            postRequest.setOrganization(organizationMapper.toEntity(organizationDto));
 
             Post postResponse = postRepository.save(postRequest);
             return toDto(postResponse);

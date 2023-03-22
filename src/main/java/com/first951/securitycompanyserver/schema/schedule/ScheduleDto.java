@@ -1,6 +1,9 @@
 package com.first951.securitycompanyserver.schema.schedule;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.first951.securitycompanyserver.schema.organization.OrganizationDto;
+import com.first951.securitycompanyserver.schema.post.PostDto;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.NotNull;
@@ -20,11 +23,6 @@ public class ScheduleDto {
     @Positive
     private Long postId;
 
-    @JsonProperty("personId")
-    @NotNull
-    @Positive
-    private Long personId;
-
     @JsonProperty("begin")
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
@@ -34,5 +32,8 @@ public class ScheduleDto {
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     private Date end;
+
+    @JsonProperty(value = "post", access = JsonProperty.Access.READ_ONLY)
+    private PostDto postDto;
 
 }

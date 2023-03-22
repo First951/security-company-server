@@ -20,15 +20,12 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
             WHERE
                 (:post IS NULL OR s.post = :post)
             AND
-                (:person IS NULL OR s.person = :person)
-            AND
                 ((cast(:begin AS DATE) IS NULL) OR (cast(s.begin AS DATE)) < (cast(:end AS DATE)))
             AND
                 ((cast(:end AS DATE) IS NULL) OR (cast(s.end AS DATE)) > (cast(:begin AS DATE)))
             ORDER BY
                 s.begin
             """)
-    List<Schedule> search(@Param("post") Post post, @Param("person") Person person,
-                          @Param("begin") Date begin, @Param("end") Date end, Pageable pageable);
+    List<Schedule> search(@Param("post") Post post, @Param("begin") Date begin, @Param("end") Date end, Pageable pageable);
 
 }

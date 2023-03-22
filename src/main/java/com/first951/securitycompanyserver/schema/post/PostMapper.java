@@ -17,18 +17,9 @@ public abstract class PostMapper {
     public abstract List<Post> toEntityList(List<PostDto> dto);
 
 
-    @Mapping(target = "placeId", ignore = true)
-    @Mapping(target = "organizationId", ignore = true)
+    @Mapping(target = "placeId", source = "entity.place.id")
+    @Mapping(target = "organizationId", source = "entity.organization.id")
     public abstract PostDto toDto(Post entity);
-
-    @AfterMapping
-    protected void toDto(@MappingTarget PostDto dto, Post entity) {
-//        PlaceDto placeDto = placeMapper.toDto(entity.getPlace());
-//        dto.setPlaceDto(placeDto);
-//
-//        OrganizationDto organizationDto = organizationMapper.toDto(entity.getOrganization());
-//        dto.setOrganizationDto(organizationDto);
-    }
 
     public abstract List<PostDto> toDtoList(List<Post> entity);
 

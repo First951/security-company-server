@@ -21,10 +21,6 @@ public class Schedule {
     @JoinColumn(name = "post", nullable = false)
     private Post post;
 
-    @ManyToOne
-    @JoinColumn(name = "person", nullable = false)
-    private Person person;
-
     @Column(name = "timestamp_begin", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date begin;
