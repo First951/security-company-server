@@ -3,7 +3,6 @@ package com.first951.securitycompanyserver.schema.person;
 import com.first951.securitycompanyserver.exception.BadRequestException;
 import com.first951.securitycompanyserver.exception.ConflictException;
 import com.first951.securitycompanyserver.exception.NotFoundException;
-import com.first951.securitycompanyserver.mapper.MappingType;
 import com.first951.securitycompanyserver.page.OffsetBasedPage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -22,7 +21,7 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public PersonDto create(PersonDto personDto) {
         try {
-            Person personRequest = personMapper.toEntity(personDto, MappingType.DEFAULT);
+            Person personRequest = personMapper.toEntity(personDto);
             Person personResponse = personRepository.save(personRequest);
             return personMapper.toDto(personResponse);
         } catch (DataIntegrityViolationException e) {
@@ -48,7 +47,7 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public PersonDto update(long id, PersonDto personDto) {
         if (personRepository.existsById(id)) {
-            Person personRequest = personMapper.toEntity(personDto, MappingType.DEFAULT);
+            Person personRequest = personMapper.toEntity(personDto);
             personRequest.setId(id);
 
             Person personResponse = personRepository.save(personRequest);

@@ -1,6 +1,7 @@
 package com.first951.securitycompanyserver.schema.mark;
 
 import com.first951.securitycompanyserver.schema.mark.type.MarkType;
+import com.first951.securitycompanyserver.schema.person.Person;
 import com.first951.securitycompanyserver.schema.schedule.Schedule;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -22,6 +23,10 @@ public class Mark {
     @ManyToOne
     @JoinColumn(name = "schedule", nullable = false)
     private Schedule schedule;
+
+    @ManyToOne
+    @JoinColumn(name = "person")
+    private Person person;
 
     @Column(name = "plan_timestamp", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)

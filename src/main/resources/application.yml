@@ -11,7 +11,7 @@ spring:
 ## Раскоментировать для создания базы данных с нуля
 #  jpa:
 #    hibernate:
-#      ddl-auto: create
+#      ddl-auto: update
 
 springdoc:
   swagger-ui:
