@@ -24,7 +24,9 @@ public interface PostRepository extends JpaRepository<Post, Long> {
             ORDER BY
                 p.id
             """)
-    List<Post> search(@Param("place") Place place, @Param("name") String name, @Param("comment") String comment,
+    List<Post> search(@Param("place") Place place,
+                      @Param("name") String name,
+                      @Param("comment") String comment,
                       Pageable pageable);
 
 }

@@ -25,6 +25,9 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
             ORDER BY
                 s.begin
             """)
-    List<Schedule> search(@Param("post") Post post, @Param("begin") Date begin, @Param("end") Date end, Pageable pageable);
+    List<Schedule> search(@Param("post") Post post,
+                          @Param("begin") Date begin,
+                          @Param("end") Date end,
+                          Pageable pageable);
 
 }

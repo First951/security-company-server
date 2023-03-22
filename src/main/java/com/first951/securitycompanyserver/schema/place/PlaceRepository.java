@@ -19,6 +19,7 @@ public interface PlaceRepository extends JpaRepository<Place, Long> {
             ORDER BY
                 p.id
             """)
-    List<Place> search(@Param("address") String address, Pageable pageable);
+    List<Place> search(@Param("address") String address,
+                       Pageable pageable);
 
 }

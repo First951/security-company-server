@@ -30,8 +30,11 @@ public interface MarkRepository extends JpaRepository<Mark, Long> {
             ORDER BY
                 m.planTimestamp
             """)
-    List<Mark> search(@Param("schedule") Schedule schedule, @Param("planTimestamp") Date planTimestamp,
-                      @Param("factTimestamp") Date factTimestamp, @Param("type") MarkType type,
-                      @Param("comment") String comment, Pageable pageable);
+    List<Mark> search(@Param("schedule") Schedule schedule,
+                      @Param("planTimestamp") Date planTimestamp,
+                      @Param("factTimestamp") Date factTimestamp,
+                      @Param("type") MarkType type,
+                      @Param("comment") String comment,
+                      Pageable pageable);
 
 }

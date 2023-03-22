@@ -25,8 +25,10 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
             ORDER BY
                 p.id
             """)
-    List<Person> search(@Param("lastName") String lastName, @Param("firstName") String firstName,
-                        @Param("patronymic") String patronymic, @Param("phoneNumber") String phoneNumber,
+    List<Person> search(@Param("lastName") String lastName,
+                        @Param("firstName") String firstName,
+                        @Param("patronymic") String patronymic,
+                        @Param("phoneNumber") String phoneNumber,
                         Pageable pageable);
 
 }
