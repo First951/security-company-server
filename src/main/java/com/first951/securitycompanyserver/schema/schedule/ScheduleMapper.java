@@ -1,15 +1,8 @@
 package com.first951.securitycompanyserver.schema.schedule;
 
 import com.first951.securitycompanyserver.mapper.MappingType;
-import com.first951.securitycompanyserver.schema.person.PersonDto;
-import com.first951.securitycompanyserver.schema.person.PersonMapper;
-import com.first951.securitycompanyserver.schema.person.PersonService;
-import com.first951.securitycompanyserver.schema.post.PostDto;
-import com.first951.securitycompanyserver.schema.post.PostMapper;
-import com.first951.securitycompanyserver.schema.post.PostService;
 import lombok.RequiredArgsConstructor;
 import org.mapstruct.*;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 

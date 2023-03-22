@@ -1,12 +1,10 @@
 package com.first951.securitycompanyserver.schema.place;
 
 import com.first951.securitycompanyserver.mapper.MappingType;
-import com.first951.securitycompanyserver.schema.post.PostDto;
-import com.first951.securitycompanyserver.schema.post.PostMapper;
-import com.first951.securitycompanyserver.schema.post.PostService;
 import lombok.RequiredArgsConstructor;
-import org.mapstruct.*;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mapstruct.Context;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import java.util.List;
 

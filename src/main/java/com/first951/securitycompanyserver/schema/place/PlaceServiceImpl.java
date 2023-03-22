@@ -3,7 +3,6 @@ package com.first951.securitycompanyserver.schema.place;
 import com.first951.securitycompanyserver.exception.BadRequestException;
 import com.first951.securitycompanyserver.exception.ConflictException;
 import com.first951.securitycompanyserver.exception.NotFoundException;
-import com.first951.securitycompanyserver.mapper.MappingType;
 import com.first951.securitycompanyserver.page.OffsetBasedPage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;

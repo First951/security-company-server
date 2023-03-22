@@ -30,6 +30,7 @@ public class PostDto {
     private String name;
 
     @JsonProperty("comment")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String comment;
 
     @JsonProperty(value = "place", access = JsonProperty.Access.READ_ONLY)

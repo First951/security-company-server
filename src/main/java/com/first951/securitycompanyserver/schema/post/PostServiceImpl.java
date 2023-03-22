@@ -3,7 +3,6 @@ package com.first951.securitycompanyserver.schema.post;
 import com.first951.securitycompanyserver.exception.BadRequestException;
 import com.first951.securitycompanyserver.exception.ConflictException;
 import com.first951.securitycompanyserver.exception.NotFoundException;
-import com.first951.securitycompanyserver.mapper.MappingType;
 import com.first951.securitycompanyserver.page.OffsetBasedPage;
 import com.first951.securitycompanyserver.schema.organization.OrganizationDto;
 import com.first951.securitycompanyserver.schema.organization.OrganizationMapper;

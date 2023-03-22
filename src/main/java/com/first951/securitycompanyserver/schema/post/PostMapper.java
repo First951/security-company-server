@@ -1,14 +1,9 @@
 package com.first951.securitycompanyserver.schema.post;
 
-import com.first951.securitycompanyserver.mapper.MappingType;
-import com.first951.securitycompanyserver.schema.organization.OrganizationDto;
-import com.first951.securitycompanyserver.schema.organization.OrganizationMapper;
-import com.first951.securitycompanyserver.schema.organization.OrganizationService;
-import com.first951.securitycompanyserver.schema.place.PlaceDto;
-import com.first951.securitycompanyserver.schema.place.PlaceMapper;
-import com.first951.securitycompanyserver.schema.place.PlaceService;
-import org.mapstruct.*;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mapstruct.AfterMapping;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 
 import java.util.List;
 

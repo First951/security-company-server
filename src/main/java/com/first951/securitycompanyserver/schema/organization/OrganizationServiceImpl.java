@@ -3,10 +3,7 @@ package com.first951.securitycompanyserver.schema.organization;
 import com.first951.securitycompanyserver.exception.BadRequestException;
 import com.first951.securitycompanyserver.exception.ConflictException;
 import com.first951.securitycompanyserver.exception.NotFoundException;
-import com.first951.securitycompanyserver.mapper.MappingType;
 import com.first951.securitycompanyserver.page.OffsetBasedPage;
-import com.first951.securitycompanyserver.schema.post.Post;
-import com.first951.securitycompanyserver.schema.post.PostDto;
 import com.first951.securitycompanyserver.schema.post.PostMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -29,7 +26,7 @@ public class OrganizationServiceImpl implements OrganizationService {
         try {
             Organization organizationRequest = organizationMapper.toEntity(organizationDto);
             Organization organizationResponse = organizationRepository.save(organizationRequest);
-            return organizationMapper.toDto(organizationResponse);
+            return toDto(organizationResponse);
         } catch (DataIntegrityViolationException e) {
             throw new ConflictException("Нарушение целостности данных");
         }
@@ -39,21 +36,14 @@ public class OrganizationServiceImpl implements OrganizationService {
     public OrganizationDto read(long id) {
         Organization organizationResponse = organizationRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Организация с id=" + id + " не найдена"));
-        OrganizationDto organizationDto = organizationMapper.toDto(organizationResponse);
-        organizationDto.setPostDtos(new ArrayList<>());
-        for (Post post : organizationResponse.getPosts()) {
-            PostDto postDto = postMapper.toDto(post);
-            organizationDto.getPostDtos().add(postDto);
-        }
-
-        return organizationDto;
+        return toDto(organizationResponse);
     }
 
     @Override
     public List<OrganizationDto> search(OrganizationDto filter, Long from, Integer size) {
         Pageable pageable = new OffsetBasedPage(from, size);
         List<Organization> page = organizationRepository.search(filter.getAddress(), filter.getName(), pageable);
-        return organizationMapper.toDtoList(page);
+        return toDtoList(page);
     }
 
     @Override
@@ -63,7 +53,7 @@ public class OrganizationServiceImpl implements OrganizationService {
             organizationRequest.setId(id);
 
             Organization organizationResponse = organizationRepository.save(organizationRequest);
-            return organizationMapper.toDto(organizationResponse);
+            return toDto(organizationResponse);
         } else {
             throw new NotFoundException("Организация с id=" + id + " не найдена");
         }
@@ -83,8 +73,16 @@ public class OrganizationServiceImpl implements OrganizationService {
         }
     }
 
-    private OrganizationDto addExpand(OrganizationDto organizationDto, Organization organization) {
-        return null;
+    private OrganizationDto toDto(Organization organization) {
+        OrganizationDto organizationDto = organizationMapper.toDto(organization);
+        organizationDto.setPostDtos(postMapper.toDtoList(organization.getPosts()));
+        return organizationDto;
+    }
+
+    private List<OrganizationDto> toDtoList(List<Organization> organizations) {
+        List<OrganizationDto> response = new ArrayList<>();
+        organizations.forEach(organization -> response.add(toDto(organization)));
+        return response;
     }
 
 }

@@ -1,6 +1,5 @@
 package com.first951.securitycompanyserver.schema.place;
 
-import com.first951.securitycompanyserver.schema.organization.Organization;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
